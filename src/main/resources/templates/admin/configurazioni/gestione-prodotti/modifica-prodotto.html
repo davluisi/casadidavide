@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      th:with="page='modifica-prodotto'">
+
+<head>
+    <title>Modifica prodotto</title>
+</head>
+
+<body>
+<section layout:fragment="content">
+
+    <div class="container">
+
+        <!-- Pulsante per tornare a Gestione prodotti -->
+        <div class="d-flex justify-content-start mb-3">
+            <a th:href="@{/admin/configurazioni/gestione-prodotti}" class="btn btn-secondary">←</a>
+        </div>
+
+
+        <!-- Form di modifica -->
+        <form th:action="@{'/admin/configurazioni/gestione-prodotti/modifica/' + ${prodotto.id}}" method="post">
+            <div class="mb-3">
+                <label for="descrizioneProdotto" class="form-label">Descrizione</label>
+                <input type="text" class="form-control" id="descrizioneProdotto" name="descrizioneProdotto"
+                       th:value="${prodotto.descrizioneProdotto}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="costoProdotto" class="form-label">Costo di acquisto</label>
+                <input type="text" class="form-control" id="costoProdotto" name="costoProdotto"
+                       th:value="${prodotto.costoProdotto}" required>
+            </div>
+            
+            <div class="mb-3">
+                <label for="prezzoVendita" class="form-label">Prezzo di vendita</label>
+                <input type="text" class="form-control" id="prezzoVendita" name="prezzoVendita"
+                       th:value="${prodotto.prezzoVendita}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="produttore" class="form-label">Produttore</label>
+                <input type="text" class="form-control" id="produttore" name="produttore"
+                       th:value="${prodotto.produttore}" required>
+            </div>
+
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Salva modifiche</button>
+            </div>
+        </form>
+
+    </div>
+
+</section>
+</body>
+</html>

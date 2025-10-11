@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      th:with="page='login'">
+<head>
+    
+</head>
+<body>
+<section layout:fragment="content">
+	<div th:if="${param.success}" class="alert alert-info text-center">
+	    Registrazione effettuata! Attendi l'abilitazione del tuo account.
+	</div>
+    <div th:if="${param.logout}" class="alert alert-success">Logout effettuato</div>
+    <div th:if="${param.error}" class="alert alert-danger">Credenziali errate o account non abilitato</div>
+
+    <form th:action="@{/login}" method="post" class="mt-5 col-md-6 offset-md-3">
+        <div class="mb-3">
+            <label for="username" class="form-label">Nome utente</label>
+            <input type="text" name="username" id="username" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" name="password" id="password" class="form-control" required />
+        </div>
+        <div class="d-grid">
+            <button type="submit" class="btn btn-primary">Login</button>
+        </div>
+        <div class="text-center mt-3">
+            <a th:href="@{/registrazione}" style="color: navy;">Non hai un account? Registrati</a>
+        </div>
+    </form>
+
+</section>
+</body>
+</html>

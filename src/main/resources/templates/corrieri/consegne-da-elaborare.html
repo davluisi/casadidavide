@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      th:with="page='consegne-da-elaborare'">
+
+<head>
+</head>
+
+<body>
+<section layout:fragment="content">
+    <div class="container">
+
+       
+        
+        <!-- Pulsante Indietro -->
+        <div class="d-flex justify-content-start mb-4">
+            <a th:href="@{/corrieri/scegli-campagna-da-spedire}" class="btn btn-secondary">←</a>
+        </div>
+        
+        <!-- Pulsante Esporta in XLS -->
+<div class="d-flex justify-content-end mb-3">
+    <a th:href="@{'/corrieri/consegne-da-elaborare/esporta-xls/' + ${campagna.id}}" 
+       class="btn btn-success">
+        📦 Esporta in XLS
+    </a>
+</div>
+        
+
+        <!-- Tabella prenotazioni da elaborare -->
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped align-middle text-white">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Prodotto</th>
+                        <th>Quantità</th>
+                        <th>Data</th>
+                        <th>Cliente</th>
+                        <th>Indirizzo</th>
+                        <th>Tracciamento</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="p : ${prenotazioni}">
+                        <td th:text="${p.prodotto.descrizioneProdotto}"></td>
+                        <td class="text-center" th:text="${p.quantita}"></td>
+                        <td th:text="${#temporals.format(p.dataPrenotazione, 'dd/MM/yyyy')}"></td>
+                        <td>
+                            <a th:href="@{/corrieri/dettagli-cliente/{idCliente}(idCliente=${p.cliente.id}, idCampagna=${p.campagna.id})}"
+   th:text="${p.cliente.nominativo}"></a>
+
+                        </td>
+                        <td th:text="${p.cliente.indirizzoSpedizione}"></td>
+                        <td>
+                            <a th:href="@{'/corrieri/elabora-spedizione/' + ${p.id}}"
+                               class="btn btn-sm btn-primary">
+                                Inserisci tracciamento spedizione
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</section>
+</body>
+</html>

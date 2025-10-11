@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      th:with="page='consegne-effettuate'">
+
+<head>
+    <title>Consegne effettuate</title>
+</head>
+
+<body>
+<section layout:fragment="content">
+    <div class="container">
+
+       <!-- Pulsante Indietro -->
+        <div class="d-flex justify-content-start mb-4">
+            <a th:href="@{/corrieri/scegli-campagna-effettuate}" class="btn btn-secondary">←</a>
+        </div>
+        
+        <!-- Pulsante Esporta in XLS -->
+<div class="d-flex justify-content-end mb-3">
+    <a th:href="@{'/corrieri/consegne-effettuate/esporta-xls/' + ${campagna.id}}" 
+       class="btn btn-success">
+        📦 Esporta in XLS
+    </a>
+</div>
+        
+        
+        
+
+        <!-- Tabella consegne effettuate -->
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped align-middle text-white">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Data</th>
+                        <th>Prodotto</th>
+                        <th>Quantità</th>
+                        <th>Cliente</th>
+                        <th>Indirizzo</th>
+                        <th>Tracciamento</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="p : ${consegneEffettuate}">
+                        <td th:text="${#temporals.format(p.dataSalvataggioTracciamento, 'dd/MM/yyyy')}"></td>
+                        <td th:text="${p.prodotto.descrizioneProdotto}"></td>
+                        <td class="text-center" th:text="${p.quantita}"></td>
+                        <td th:text="${p.cliente.nominativo}"></td>
+                        <td th:text="${p.cliente.indirizzoSpedizione}"></td>
+                        <td th:text="${p.tracciamentoSpedizione}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</section>
+</body>
+</html>

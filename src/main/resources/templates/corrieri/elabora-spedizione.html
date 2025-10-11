@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      th:with="page='elabora-spedizione'">
+
+<head>
+    <title>Elabora spedizione</title>
+</head>
+
+<body>
+<section layout:fragment="content">
+    <div class="container">
+
+        <!-- Pulsante indietro -->
+        <div class="d-flex justify-content-start mb-4">
+<a th:href="@{'/corrieri/consegne-da-elaborare'(idCampagna=${prenotazione.campagna.id})}"
+   class="btn btn-secondary">←</a>
+        </div>
+
+        <!-- Titolo -->
+        <h2 class="mb-4 text-white">Inserisci tracciamento spedizione</h2>
+
+        <!-- Info prenotazione -->
+        <div class="mb-4 text-white">
+            <p><strong>Campagna:</strong> <span th:text="${prenotazione.campagna.descrizioneCampagna}"></span></p>
+            <p><strong>Prodotto:</strong> <span th:text="${prenotazione.prodotto.descrizioneProdotto}"></span></p>
+            <p><strong>Quantità:</strong> <span th:text="${prenotazione.quantita}"></span></p>
+            <p><strong>Cliente:</strong> <span th:text="${prenotazione.cliente.nominativo}"></span></p>
+        </div>
+
+        <!-- Form di inserimento tracciamento -->
+        <form th:action="@{'/corrieri/elabora-spedizione/' + ${prenotazione.id}}" method="post">
+            <div class="mb-3">
+                <label for="tracciamentoSpedizione" class="form-label text-white">Tracciamento spedizione (link o descrizione)</label>
+                <input type="text" class="form-control" id="tracciamentoSpedizione" name="tracciamentoSpedizione"
+                       placeholder="Inserisci link o codice spedizione" required>
+            </div>
+
+            <div class="text-left mt-3">
+                <button type="submit" class="btn btn-success px-4">Salva tracciamento</button>
+            </div>
+        </form>
+
+    </div>
+</section>
+</body>
+</html>

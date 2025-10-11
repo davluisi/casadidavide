@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      th:with="page='vedi-prenotazioni-campagna'">
+
+<head>
+
+<style>
+    .col-min {
+        width: 1%;
+        white-space: nowrap; 
+    }
+</style>
+
+    <title th:text="${title}">Elenco prenotazioni effettuate</title>
+</head>
+
+<body>
+<section layout:fragment="content">
+    <div class="container">
+
+ <!-- Pulsanti -->
+<div class="d-flex justify-content-between mb-4">
+    <a th:href="@{/soci/prenotazione-prodotti}" class="btn btn-secondary">←</a>
+
+    <a th:href="@{'/soci/prenotazione-prodotti/esporta-xls/' + ${campagna.id}}" class="btn btn-success">
+        📄 Esporta in Excel
+    </a>
+</div>
+
+
+        <!-- Titolo dinamico -->
+        <h2 class="mb-4 text-white">Campagna: <span th:text="${campagna.descrizioneCampagna}"></span></h2>
+
+		
+		
+        <!-- Tabella prenotazioni -->
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped align-middle text-white">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Socio</th>
+                        <th>Prodotto</th>
+                        <th class="col-min text-center">Quantità</th>
+                        <th>Cliente</th>
+                        <th>Ricavo</th>
+                        <th>Data</th>
+                        <th class="col-min text-center">Inviata al magazzino</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="p : ${prenotazioni}">
+                        <td th:text="${p.socio.nominativo}"></td>
+                        <td th:text="${p.prodotto.descrizioneProdotto}"></td>
+                        <td class="text-center" th:text="${p.quantita}"></td>
+                        <td th:text="${p.cliente.nominativo}"></td>
+                        <td th:text="'€' + ${p.ricavo}"></td>
+                        <td th:text="${#temporals.format(p.dataPrenotazione, 'dd/MM/yyyy')}"></td>
+                        <td class="text-center">
+						    <span th:if="${p.elencoPas}" class="text-success fw-bold">&#10003;</span>
+						</td>
+
+                        
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</section>
+</body>
+</html>

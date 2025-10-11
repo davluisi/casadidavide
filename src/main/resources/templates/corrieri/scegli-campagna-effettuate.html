@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      th:with="page='scegli-campagna-effettuate'">
+
+<head>
+
+    <!-- Select2 per ricerca -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <style>
+        .select2-container--default .select2-selection--single {
+            background-color: #fff;
+            color: #000;
+        }
+        .select2-selection__rendered,
+        .select2-selection__placeholder {
+            color: #000 !important;
+        }
+        .select2-results__option {
+            color: #000;
+        }
+        .select2-search__field {
+            color: #000;
+        }
+    </style>
+</head>
+
+<body>
+<section layout:fragment="content">
+    <div class="container text-center">
+    
+                 <!-- Tasto indietro -->
+		<div class="d-flex justify-content-between mb-4">
+		    <a th:href="@{/corrieri/consegne}" class="btn btn-secondary">←</a>
+		    
+		</div>
+
+
+        <form th:action="@{/corrieri/consegne-effettuate}" method="post" class="col-md-6 offset-md-3">
+            <div class="mb-4">
+                <label for="idCampagna" class="form-label text-white">Campagna</label>
+                <select id="idCampagna" name="idCampagna" class="form-select select2" required>
+                    <option value="" disabled selected>Seleziona una campagna...</option>
+                    <option th:each="campagna : ${campagne}"
+                            th:value="${campagna.id}"
+                            th:text="${campagna.descrizioneCampagna}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Conferma</button>
+            </div>
+        </form>
+    </div>
+</section>
+
+<script>
+    $(document).ready(function() {
+        $('.select2').select2({
+            placeholder: "Seleziona una campagna...",
+            allowClear: true,
+            width: '100%',
+            language: {
+                noResults: function() {
+                    return "Nessuna campagna trovata";
+                }
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

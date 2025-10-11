@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layout}"
+      th:with="page='home'">
+
+<head>
+</head>
+<body>
+<section layout:fragment="content">
+
+    <div class="container mt-5">
+        <div class="row align-items-center">
+            <!-- Colonna immagine -->
+            <div class="col-md-6 d-flex justify-content-center">
+                <img th:src="@{/uploads/images/logo_asso.jpg}" alt="Logo Associazione"
+                     class="img-fluid" style="max-width: 80%; height: auto;">
+            </div>
+
+            <!-- Colonna pulsanti -->
+            <div class="col-md-6 d-flex flex-column align-items-center gap-3 mt-4 mt-md-0">
+
+                <!-- Pulsanti per ruolo: SOCIO -->
+                <div sec:authorize="hasRole('SOCIO')" class="d-flex flex-column align-items-center gap-3 w-100">
+                    <a th:href="@{/soci/prenotazione-prodotti}" class="btn btn-primary btn-lg w-75">Prenotazioni</a>
+                </div>
+
+                <!-- Pulsanti per ruolo: CORRIERE -->
+                <div sec:authorize="hasRole('CORRIERE')" class="d-flex flex-column align-items-center gap-3 w-100">
+        	        <a th:href="@{/soci/prenotazione-prodotti}" class="btn btn-primary btn-lg w-75">Prenotazioni</a>
+                    <a th:href="@{/corrieri/consegne}" class="btn btn-success btn-lg w-75">Magazzino</a>
+                </div>
+
+                <!-- Pulsanti per ruolo: ADMIN -->
+                <div sec:authorize="hasRole('ADMIN')" class="d-flex flex-column align-items-center gap-3 w-100">
+                    <a th:href="@{/soci/prenotazione-prodotti}" class="btn btn-primary btn-lg w-75">Prenotazioni</a>
+                    <a th:href="@{/corrieri/consegne}" class="btn btn-success btn-lg w-75">Magazzino</a>
+                    <a th:href="@{/admin/configurazioni}" class="btn btn-warning btn-lg w-75">Configurazioni</a>
+                    <a th:href="@{/admin/scegli-campagna-invio-ordini}" class="btn btn-danger btn-lg w-75">Invia prenotazioni a magazzino</a>
+                    
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</section>
+</body>
+</html>

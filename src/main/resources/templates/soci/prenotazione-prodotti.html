@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      th:with="page='prenotazione-prodotti'">
+
+<head>
+    <title th:text="${title}">Prenotazioni</title>
+</head>
+
+<body>
+<section layout:fragment="content">
+
+    <div class="container">
+    
+        <!-- Pulsante per tornare indietro -->
+        <div class="d-flex justify-content-start mb-4">
+            <a th:href="@{'/home'}" class="btn btn-secondary">←</a>
+        </div>
+    	
+	    <!-- Tabella Campagne -->
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped align-middle text-white">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Campagne</th>
+                        <th>Prodotti</th>
+                        <th>Elenco prenotazioni effettuate</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="campagna : ${campagne}">
+                        <td th:text="${campagna.descrizioneCampagna}"></td>
+                        <td>
+                            <a th:href="@{'/soci/prenotazione-prodotti/disponibilita-prenotazione-campagna/' 
+                            		+ ${campagna.id}}" class="btn btn-warning btn-sm me-2">Prenota</a>
+                        </td>
+                        <td>
+				            <a th:href="@{'/soci/prenotazione-prodotti/vedi-prenotazioni/' + ${campagna.id}}"
+				               class="btn btn-info btn-sm">Vedi elenco prenotazioni</a>
+				        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</section>
+</body>
+</html>

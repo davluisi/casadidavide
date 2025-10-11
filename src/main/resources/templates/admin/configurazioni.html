@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      th:with="page='configurazioni'">
+
+<head>
+    <title th:text="${title}">Configurazioni</title>
+</head>
+<body>
+<section layout:fragment="content">
+
+    <div class="container mt-5">
+        <div class="row align-items-center">
+        
+		<!-- Pulsante per tornare indietro -->
+        <div class="d-flex justify-content-start mb-4">
+            <a th:href="@{'/home'}" class="btn btn-secondary">←</a>
+        </div>
+
+            <!-- Colonna immagine -->
+            <div class="col-md-6 text-center mb-4 mb-md-0">
+                <img th:src="@{/uploads/images/logo_asso.jpg}" alt="Logo Associazione"
+                     class="img-fluid" style="max-width: 400px;">
+            </div>
+
+            <!-- Colonna pulsanti -->
+            <div class="col-md-6 d-flex flex-column gap-3">
+                <a th:href="@{/admin/configurazioni/gestione-soci}" class="btn btn-outline-light btn-lg btn-block bg-primary">Gestione Soci</a>
+                <a th:href="@{/admin/configurazioni/gestione-clienti}" class="btn btn-outline-light btn-lg btn-block bg-success">Gestione Clienti</a>
+                <a th:href="@{/admin/configurazioni/gestione-campagne}" class="btn btn-outline-light btn-lg btn-block bg-info">Gestione Campagne</a>
+                <a th:href="@{/admin/configurazioni/gestione-prodotti}" class="btn btn-outline-light btn-lg btn-block bg-warning text-dark">Gestione Prodotti</a>
+                <a th:href="@{/admin/configurazioni/gestione-disponibilita}" class="btn btn-outline-light btn-lg btn-block bg-danger">Gestione Disponibilità Prodotti per Campagne</a>
+            </div>
+
+        </div>
+    </div>
+
+</section>
+</body>
+</html>

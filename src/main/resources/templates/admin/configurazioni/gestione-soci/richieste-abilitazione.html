@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      th:with="page='richieste-abilitazione'">
+
+<head>
+    <title>Richieste di Abilitazione</title>
+</head>
+
+<body>
+<section layout:fragment="content">
+
+	<!-- Pulsante per tornare a Configurazioni -->
+	<div class="d-flex justify-content-start mb-3">
+	    <a th:href="@{/admin/configurazioni/gestione-soci}" class="btn btn-secondary">←</a>
+	</div>
+	
+    <div class="container">
+
+        <div th:if="${#lists.isEmpty(soci)}">
+            <p class="text-center">Non ci sono richieste in attesa.</p>
+        </div>
+
+        <table class="table table-striped" th:if="${!#lists.isEmpty(soci)}">
+            <thead>
+                <tr>
+                    <th>Nominativo</th>
+                    <th>Ruolo</th>
+                    <th>Azioni</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="socio : ${soci}">
+                    <td th:text="${socio.nominativo}"></td>
+                    <td th:text="${socio.ruolo}"></td>
+                    <td>
+                        <form th:action="@{/admin/configurazioni/gestione-soci/abilita-account}" method="post" style="display:inline">
+                            <input type="hidden" name="id" th:value="${socio.id}" />
+                            <button type="submit" class="btn btn-success btn-sm">Abilita</button>
+                        </form>
+
+                        <form th:action="@{/admin/configurazioni/gestione-soci/elimina-richiesta}" method="post" style="display:inline" 
+                              onsubmit="return confirm('Sei sicuro di voler eliminare questa richiesta?');">
+                            <input type="hidden" name="id" th:value="${socio.id}" />
+                            <button type="submit" class="btn btn-danger btn-sm">Elimina</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+</body>
+</html>

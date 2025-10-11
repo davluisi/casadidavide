@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      th:with="page='aggiungi-prodotto'">
+
+<head>
+    <title>Nuovo prodotto</title>
+    <style>
+        /* Layout della riga dei campi */
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .form-row .form-group {
+            flex: 1; /* Ogni gruppo occupa spazio proporzionale */
+            min-width: 180px;
+        }
+
+        /* Il produttore occupa un po’ più spazio */
+        .form-group.produttore {
+            flex: 1.5;
+        }
+    </style>
+</head>
+
+<body>
+<section layout:fragment="content">
+
+    <div class="container">
+
+        <!-- Pulsante per tornare a Gestione prodotti -->
+        <div class="d-flex justify-content-start mb-4">
+            <a th:href="@{/admin/configurazioni/gestione-prodotti}" class="btn btn-secondary">←</a>
+        </div>
+
+        <form th:action="@{/admin/configurazioni/gestione-prodotti/aggiungi-prodotto}" method="post">
+
+            <!-- Prima riga: descrizione -->
+            <div class="mb-3">
+                <label for="descrizioneProdotto" class="form-label text-white">Descrizione</label>
+                <input type="text" class="form-control" id="descrizioneProdotto" name="descrizioneProdotto" required>
+            </div>
+
+            <!-- Seconda riga: costo, prezzo, produttore -->
+            <div class="form-row mb-4">
+                <div class="form-group">
+                    <label for="costoProdotto" class="form-label text-white">Costo di acquisto</label>
+                    <input type="number" class="form-control" id="costoProdotto" name="costoProdotto"
+                           step="0.01" min="0" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="prezzoVendita" class="form-label text-white">Prezzo di vendita</label>
+                    <input type="number" class="form-control" id="prezzoVendita" name="prezzoVendita"
+                           step="0.01" min="0" required>
+                </div>
+
+                <div class="form-group produttore">
+                    <label for="produttore" class="form-label text-white">Produttore</label>
+                    <input type="text" class="form-control" id="produttore" name="produttore" required>
+                </div>
+            </div>
+
+            <!-- Pulsante di salvataggio -->
+            <div class="d-grid">
+                <button type="submit" class="btn btn-success">Salva prodotto</button>
+            </div>
+        </form>
+    </div>
+
+</section>
+</body>
+</html>

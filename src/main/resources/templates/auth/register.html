@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      th:with="page='register'">
+<head>
+    <title>Registrazione</title>
+    <script>
+        function copiaIndirizzo() {
+            if (document.getElementById("stessoIndirizzo").checked) {
+                document.getElementById("indirizzoDomicilio").value = document.getElementById("indirizzoResidenza").value;
+                document.getElementById("comuneDomicilio").value = document.getElementById("comuneResidenza").value;
+                document.getElementById("provinciaDomicilio").value = document.getElementById("provinciaResidenza").value;
+                document.getElementById("capDomicilio").value = document.getElementById("capResidenza").value;
+            }
+        }
+
+        function verificaPassword() {
+            const pass = document.getElementById("password").value;
+            const confirm = document.getElementById("confirmPassword").value;
+            if (pass !== confirm) {
+                alert("Le password non coincidono.");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+<section layout:fragment="content">
+
+    <div th:if="${error}" class="alert alert-danger text-center mt-3" th:text="${error}"></div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+
+            <form th:action="@{/registrazione}" method="post" th:object="${socio}" class="mt-4" onsubmit="return verificaPassword()">
+
+				<div class="text-center mt-4 mb-5">
+                    <a th:href="@{/login}" class="btn btn-secondary">Torna al login</a>
+                </div>
+
+                <!-- Nominativo -->
+                <div class="mb-3">
+                    <label class="form-label">Nome e Cognome</label>
+                    <input type="text" name="nominativo" class="form-control" required th:value="*{nominativo}">
+                </div>
+
+                <!-- Email e Username -->
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" name="email" class="form-control" required th:value="*{email}">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Nome utente</label>
+                        <input type="text" name="nomeUtente" class="form-control" required th:value="*{nomeUtente}">
+                    </div>
+                </div>
+
+                <!-- Password -->
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Password</label>
+                        <input type="password" id="password" name="password" class="form-control" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Conferma Password</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" required>
+                    </div>
+                </div>
+
+                <!-- Ruolo -->
+                <div class="mb-3">
+                    <label class="form-label">Ruolo</label>
+                    <select name="ruolo" class="form-select" required>
+                        <option value="">-- Seleziona --</option>
+                        <option value="SOCIO" th:selected="*{ruolo == 'SOCIO'}">Socio</option>
+                        <option value="CORRIERE" th:selected="*{ruolo == 'CORRIERE'}">Corriere</option>
+                    </select>
+                </div>
+
+                <!-- Data di nascita -->
+                <div class="mb-3">
+                    <label class="form-label">Data di nascita</label>
+                    <input type="date" name="dataNascita" class="form-control" required th:value="*{dataNascita}">
+                </div>
+
+                <!-- Indirizzo di residenza -->
+                <h5>Indirizzo di Residenza</h5>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Indirizzo</label>
+                        <input type="text" id="indirizzoResidenza" name="indirizzoResidenza" class="form-control" required th:value="*{indirizzoResidenza}">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Comune</label>
+                        <input type="text" id="comuneResidenza" name="comuneResidenza" class="form-control" required th:value="*{comuneResidenza}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Provincia</label>
+                        <input type="text" id="provinciaResidenza" name="provinciaResidenza" class="form-control" required th:value="*{provinciaResidenza}">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">CAP</label>
+                        <input type="text" id="capResidenza" name="capResidenza" class="form-control" required th:value="*{capResidenza}">
+                    </div>
+                </div>
+
+                <!-- Indirizzo di domicilio -->
+                <h5 class="mt-4">Indirizzo di Domicilio</h5>
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" id="stessoIndirizzo" onchange="copiaIndirizzo()">
+                    <label class="form-check-label" for="stessoIndirizzo">
+                        Uguale alla residenza
+                    </label>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Indirizzo</label>
+                        <input type="text" id="indirizzoDomicilio" name="indirizzoDomicilio" class="form-control" required th:value="*{indirizzoDomicilio}">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Comune</label>
+                        <input type="text" id="comuneDomicilio" name="comuneDomicilio" class="form-control" required th:value="*{comuneDomicilio}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Provincia</label>
+                        <input type="text" id="provinciaDomicilio" name="provinciaDomicilio" class="form-control" required th:value="*{provinciaDomicilio}">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">CAP</label>
+                        <input type="text" id="capDomicilio" name="capDomicilio" class="form-control" required th:value="*{capDomicilio}">
+                    </div>
+                </div>
+
+                <div class="d-grid mt-4">
+                    <button type="submit" class="btn btn-success">Registrati</button>
+                </div>
+
+                
+            </form>
+        </div>
+    </div>
+</section>
+</body>
+</html>

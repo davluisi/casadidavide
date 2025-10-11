@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      th:with="page='aggiungi-cliente'">
+
+<head>
+    <title>Nuovo cliente</title>
+</head>
+
+<body>
+<section layout:fragment="content">
+
+    <div class="container">
+
+        <!-- Pulsante per tornare a Gestione Clienti -->
+        <div class="d-flex justify-content-start mb-4">
+            <a th:href="@{/admin/configurazioni/gestione-clienti}" class="btn btn-secondary">←</a>
+        </div>
+
+
+        <form th:action="@{/admin/configurazioni/gestione-clienti/aggiungi-cliente}" method="post">
+
+            <div class="mb-3">
+                <label for="nominativo" class="form-label text-white">Nominativo</label>
+                <input type="text" class="form-control" id="nominativo" name="nominativo" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label text-white">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="indirizzo_spedizione" class="form-label text-white">Indirizzo di spedizione</label>
+                <input type="text" class="form-control" id="indirizzoSpedizione" name="indirizzoSpedizione" required>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label for="comune_spedizione" class="form-label text-white">Comune</label>
+                    <input type="text" class="form-control" id="comuneSpedizione" name="comuneSpedizione" required>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="provincia_spedizione" class="form-label text-white">Provincia</label>
+                    <input type="text" class="form-control" id="provinciaSpedizione" name="provinciaSpedizione" required>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="nazione_spedizione" class="form-label text-white">Nazione</label>
+                    <input type="text" class="form-control" id="nazioneSpedizione" name="nazioneSpedizione" required>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="telefono_cellulare" class="form-label text-white">Telefono Cellulare</label>
+                <input type="text" class="form-control" id="telefonoCellulare" name="telefonoCellulare" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="telefono_fisso" class="form-label text-white">Telefono Fisso (facoltativo)</label>
+                <input type="text" class="form-control" id="telefonoFisso" name="telefonoFisso">
+            </div>
+
+            <div class="mb-3">
+                <label for="fax" class="form-label text-white">Fax (facoltativo)</label>
+                <input type="text" class="form-control" id="fax" name="fax">
+            </div>
+
+            <div class="mb-4">
+                <label for="pec" class="form-label text-white">PEC (facoltativa)</label>
+                <input type="email" class="form-control" id="pec" name="pec">
+            </div>
+
+            <div class="d-grid">
+                <button type="submit" class="btn btn-success">Salva Cliente</button>
+            </div>
+        </form>
+    </div>
+
+</section>
+</body>
+</html>

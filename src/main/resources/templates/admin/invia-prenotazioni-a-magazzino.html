@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      th:with="page='invia-prenotazioni-a-magazzino'">
+
+<head>
+    <title>Seleziona prenotazioni da inviare</title>
+    <style>
+        .col-min {
+            width: 1%;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+
+<body>
+<section layout:fragment="content">
+    <div class="container">
+    
+    	<!-- Pulsante per tornare indietro -->
+        <div class="d-flex justify-content-start mb-4">
+            <a th:href="@{'/admin/scegli-campagna-invio-ordini'}" class="btn btn-secondary">←</a>
+        </div>
+        <h2 class="text-white mb-4">Seleziona prenotazioni da inviare al magazzino</h2>
+
+        <form th:action="@{/admin/conferma-invio-prenotazioni-a-magazzino}" method="post">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover table-striped align-middle text-white">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Socio</th>
+                            <th>Prodotto</th>
+                            <th class="col-min text-center">Quantità</th>
+                            <th>Cliente</th>
+                            <th>Ricavo</th>
+                            <th>Data</th>
+                            <th class="col-min text-center">Invia</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="p : ${prenotazioni}">
+                            <td th:text="${p.socio.nominativo}"></td>
+                            <td th:text="${p.prodotto.descrizioneProdotto}"></td>
+                            <td class="text-center" th:text="${p.quantita}"></td>
+                            <td th:text="${p.cliente.nominativo}"></td>
+                            <td th:text="'€' + ${p.ricavo}"></td>
+                            <td th:text="${#temporals.format(p.dataPrenotazione, 'dd/MM/yyyy')}"></td>
+                            <td class="text-center">
+                                <input type="checkbox" name="prenotazioniIds"
+                                       th:value="${p.id}" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-success">Conferma</button>
+            </div>
+        </form>
+    </div>
+</section>
+</body>
+</html>

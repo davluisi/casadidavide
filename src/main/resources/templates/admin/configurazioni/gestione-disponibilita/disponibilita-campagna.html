@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      th:with="page='disponibilita-campagna'">
+
+<head>
+    <title th:text="${title}">Disponibilità campagna</title>
+    <script>
+        function confermaEliminazione() {
+            return confirm("Sei sicuro di voler eliminare questa disponibilità?");
+        }
+    </script>
+    
+    <style>
+    .col-min {
+        width: 1%;
+        white-space: nowrap; 
+    }
+</style>
+</head>
+
+<body>
+<section layout:fragment="content">
+    <div class="container">
+
+        <!-- Pulsanti in alto -->
+		<div class="d-flex justify-content-between mb-4">
+		    <a th:href="@{/admin/configurazioni/gestione-disponibilita}" class="btn btn-secondary">←</a>
+		    
+		    <a th:href="@{'/admin/configurazioni/gestione-disponibilita/aggiungi/' + ${campagna.id}}" 
+		       class="btn btn-success">+ Aggiungi disponibilità</a>
+		</div>
+
+
+        <!-- Tabella disponibilità -->
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped align-middle text-white">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Prodotto</th>
+                        <th>Quantità</th>
+                        <th>Azioni</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="caricamento : ${caricamenti}">
+                        <td th:text="${caricamento.prodotto.descrizioneProdotto}"></td>
+                        <td th:text="${caricamento.quantita}"></td>
+                        <td>
+							<a th:href="@{'/admin/configurazioni/gestione-disponibilita/storico/' + ${caricamento.campagna.id} + '/' + ${caricamento.prodotto.id}}" 
+							   class="btn btn-info btn-sm me-2">
+							   Vedi storico caricamenti
+							</a>
+							
+							
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+</body>
+</html>

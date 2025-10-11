@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      th:with="page='storico-caricamenti'">
+
+<head>
+    <title th:text="${title}">Storico Caricamenti</title>
+</head>
+
+<body>
+<section layout:fragment="content">
+    <div class="container">
+
+        <!-- Pulsante per tornare indietro -->
+        <div class="d-flex justify-content-start mb-4">
+            <a th:href="@{'/admin/configurazioni/gestione-disponibilita/disponibilita-campagna/' + ${campagna.id}}" class="btn btn-secondary">
+                ←
+            </a>
+        </div>
+
+        <!-- Tabella storico -->
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped align-middle text-white">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Socio</th>
+                        <th>Data Caricamento</th>
+                        <th>Quantità</th>
+                        <th class="text-center">Azioni</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="carico : ${storico}">
+                        <td th:text="${carico.socio.nominativo}"></td>
+                        <td th:text="${#temporals.format(carico.data, 'dd/MM/yyyy')}"></td>
+                        <td th:text="${carico.quantita}"></td>
+                        <td class="text-center">
+                            <a th:href="@{'/admin/configurazioni/gestione-disponibilita/modifica-caricamento/' + ${carico.id}}" 
+                               class="btn btn-warning btn-sm me-2">Modifica</a>
+
+                            <form th:action="@{'/admin/configurazioni/gestione-disponibilita/elimina-caricamento/' + ${carico.id}}" 
+                                  method="post" style="display:inline" 
+                                  onsubmit="return confirm('Sei sicuro di voler eliminare questo caricamento?')">
+                                <button type="submit" class="btn btn-danger btn-sm">Elimina</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</section>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      th:with="page='modifica-socio'">
+
+<head>
+    <title>Modifica Socio</title>
+</head>
+
+<body>
+<section layout:fragment="content">
+
+    <div class="container">
+
+        <!-- Pulsante per tornare a Gestione Soci -->
+        <div class="d-flex justify-content-start mb-3">
+            <a th:href="@{/admin/configurazioni/gestione-soci}" class="btn btn-secondary">←</a>
+        </div>
+
+        <!-- Titolo dinamico con nome del socio -->
+        <h2 class="mb-4" th:text="${socio.nominativo}">Modifica socio</h2>
+
+        <!-- Form di modifica -->
+        <form th:action="@{'/admin/configurazioni/gestione-soci/modifica/' + ${socio.id}}" method="post">
+            <div class="mb-4">
+                <label for="ruolo" class="form-label fw-bold">Ruolo</label>
+                <select id="ruolo" name="ruolo" class="form-select" required>
+                    <option value="SOCIO" th:selected="${socio.ruolo == 'SOCIO'}">Socio</option>
+                    <option value="CORRIERE" th:selected="${socio.ruolo == 'CORRIERE'}">Corriere</option>
+                    <option value="ADMIN" th:selected="${socio.ruolo == 'ADMIN'}">Admin</option>
+                </select>
+            </div>
+
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Salva modifiche</button>
+            </div>
+        </form>
+
+    </div>
+
+</section>
+</body>
+</html>
