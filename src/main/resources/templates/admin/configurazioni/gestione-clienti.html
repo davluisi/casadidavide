@@ -5,10 +5,10 @@
       th:with="page='gestione-clienti'">
 
 <head>
-    <title th:text="${title}">Gestione clienti</title>
+    <title th:text="${title}">Gestione sostenitori</title>
     <script>
         function confermaEliminazione() {
-            return confirm("Sei sicuro di voler eliminare il cliente ?");
+            return confirm("Sei sicuro di voler eliminare il sostenitore ?");
         }
     </script>
 </head>
@@ -21,7 +21,7 @@
     	<!-- Pulsanti in alto: Configurazioni e Aggiunta -->
 		<div class="d-flex justify-content-between mb-3">
 		    <a th:href="@{/admin/configurazioni}" class="btn btn-secondary">←</a>
-   		    <a th:href="@{/admin/configurazioni/gestione-clienti/aggiungi-cliente}" class="btn btn-warning">Aggiungi cliente</a>
+   		    <a th:href="@{/admin/configurazioni/gestione-clienti/aggiungi-cliente}" class="btn btn-warning">Aggiungi sostenitore</a>
 		</div>
     
 	    <!-- Barra di ricerca -->

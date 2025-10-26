@@ -35,8 +35,10 @@
                         <th>Prodotto</th>
                         <th>Quantità</th>
                         <th>Data</th>
-                        <th>Cliente</th>
+                        <th>Sostenitore</th>
+                        <th>Email</th>
                         <th>Indirizzo</th>
+                        <th>Note</th>
                         <th>Tracciamento</th>
                     </tr>
                 </thead>
@@ -50,7 +52,9 @@
    th:text="${p.cliente.nominativo}"></a>
 
                         </td>
+                        <td th:text="${p.cliente.email}"></td>
                         <td th:text="${p.cliente.indirizzoSpedizione}"></td>
+                        <td th:text="${p.note}"></td>
                         <td>
                             <a th:href="@{'/corrieri/elabora-spedizione/' + ${p.id}}"
                                class="btn btn-sm btn-primary">

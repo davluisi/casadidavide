@@ -36,7 +36,8 @@
                         <th>Data</th>
                         <th>Prodotto</th>
                         <th>Quantità</th>
-                        <th>Cliente</th>
+                        <th>Sostenitore</th>
+                        <th>Email</th>
                         <th>Indirizzo</th>
                         <th>Tracciamento</th>
                     </tr>
@@ -47,6 +48,7 @@
                         <td th:text="${p.prodotto.descrizioneProdotto}"></td>
                         <td class="text-center" th:text="${p.quantita}"></td>
                         <td th:text="${p.cliente.nominativo}"></td>
+                        <td th:text="${p.cliente.email}"></td>
                         <td th:text="${p.cliente.indirizzoSpedizione}"></td>
                         <td th:text="${p.tracciamentoSpedizione}"></td>
                     </tr>

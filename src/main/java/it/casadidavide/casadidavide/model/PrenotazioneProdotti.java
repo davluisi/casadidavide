@@ -46,6 +46,9 @@ public class PrenotazioneProdotti {
     @Column(name="data_salvataggio_tracciamento")
     private LocalDate dataSalvataggioTracciamento;
     
+    @Column
+    private String note;
+    
     
     // Getters e Setters...
 
@@ -53,6 +56,12 @@ public class PrenotazioneProdotti {
     
 	public Long getId() {
 		return id;
+	}
+	public String getNote() {
+		return note;
+	}
+	public void setNote(String note) {
+		this.note = note;
 	}
 	public boolean isElencoPas() {
 		return elencoPas;

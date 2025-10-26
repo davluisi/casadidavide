@@ -30,31 +30,31 @@
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control" id="email" name="email"
-                       th:value="${cliente.email}" required>
+                       th:value="${cliente.email}" >
             </div>
 
             <div class="mb-3">
                 <label for="indirizzoSpedizione" class="form-label">Indirizzo di spedizione</label>
                 <input type="text" class="form-control" id="indirizzoSpedizione" name="indirizzoSpedizione"
-                       th:value="${cliente.indirizzoSpedizione}" required>
+                       th:value="${cliente.indirizzoSpedizione}" >
             </div>
 
             <div class="mb-3">
                 <label for="comuneSpedizione" class="form-label">Comune di spedizione</label>
                 <input type="text" class="form-control" id="comuneSpedizione" name="comuneSpedizione"
-                       th:value="${cliente.comuneSpedizione}" required>
+                       th:value="${cliente.comuneSpedizione}" >
             </div>
 
             <div class="mb-3">
                 <label for="provinciaSpedizione" class="form-label">Provincia di spedizione</label>
                 <input type="text" class="form-control" id="provinciaSpedizione" name="provinciaSpedizione"
-                       th:value="${cliente.provinciaSpedizione}" required>
+                       th:value="${cliente.provinciaSpedizione}" >
             </div>
 
             <div class="mb-3">
                 <label for="nazioneSpedizione" class="form-label">Nazione di spedizione</label>
                 <input type="text" class="form-control" id="nazioneSpedizione" name="nazioneSpedizione"
-                       th:value="${cliente.nazioneSpedizione}" required>
+                       th:value="${cliente.nazioneSpedizione}" >
             </div>
 
             <div class="mb-3">
@@ -79,6 +79,12 @@
                 <label for="pec" class="form-label">PEC (facoltativa)</label>
                 <input type="email" class="form-control" id="pec" name="pec"
                        th:value="${cliente.pec}">
+            </div>
+            
+            <div class="mb-3">
+                <label for="note" class="form-label">Note (facoltativo)</label>
+                <input type="text" class="form-control" id="note" name="note"
+                       th:value="${cliente.note}">
             </div>
 
             <div class="d-grid">

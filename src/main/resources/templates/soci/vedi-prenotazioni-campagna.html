@@ -43,10 +43,12 @@
                         <th>Socio</th>
                         <th>Prodotto</th>
                         <th class="col-min text-center">Quantità</th>
-                        <th>Cliente</th>
+                        <th>Sostenitore</th>
                         <th>Ricavo</th>
                         <th>Data</th>
-                        <th class="col-min text-center">Inviata al magazzino</th>
+                        <th>Note</th>
+                        <th>Inviata al magazzino</th> <!-- class="col-min text-center" -->
+                        <th>Data spedizione</th>
                         
                     </tr>
                 </thead>
@@ -58,9 +60,12 @@
                         <td th:text="${p.cliente.nominativo}"></td>
                         <td th:text="'€' + ${p.ricavo}"></td>
                         <td th:text="${#temporals.format(p.dataPrenotazione, 'dd/MM/yyyy')}"></td>
+                        <td th:text="${p.note}"></td>
                         <td class="text-center">
 						    <span th:if="${p.elencoPas}" class="text-success fw-bold">&#10003;</span>
 						</td>
+                        <td th:text="${#temporals.format(p.dataSalvataggioTracciamento, 'dd/MM/yyyy')}"></td>
+						
 
                         
                     </tr>

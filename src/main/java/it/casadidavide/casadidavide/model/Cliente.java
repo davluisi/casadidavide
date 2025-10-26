@@ -30,12 +30,22 @@ public class Cliente {
     private String fax;
     @Column
     private String pec;
+    @Column
+    private String note;
     
     
     // Getters e Setters...
     
+    
+    
 	public Long getId() {
 		return id;
+	}
+	public String getNote() {
+		return note;
+	}
+	public void setNote(String note) {
+		this.note = note;
 	}
 	public void setId(Long id) {
 		this.id = id;

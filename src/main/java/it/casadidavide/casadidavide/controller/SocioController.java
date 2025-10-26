@@ -135,6 +135,7 @@ public class SocioController {
             @PathVariable Long idProdotto,
             @RequestParam int quantita,
             @RequestParam Long idCliente,
+            @RequestParam String note,
             RedirectAttributes redirectAttributes,
             @AuthenticationPrincipal UserDetails currentUser) {
 
@@ -172,6 +173,7 @@ public class SocioController {
         prenotazione.setCliente(cliente);
         prenotazione.setSocio(socio);
         prenotazione.setQuantita(quantita);
+        prenotazione.setNote(note);
         prenotazione.setRicavo(prodotto.getPrezzoVendita().multiply(BigDecimal.valueOf(quantita)));
         prenotazione.setDataPrenotazione(LocalDate.now());
 
@@ -228,7 +230,7 @@ public class SocioController {
 
             // Intestazioni
             Row headerRow = sheet.createRow(0);
-            String[] headers = {"Socio", "Prodotto", "Quantità", "Cliente", "Ricavo (€)", "Data Prenotazione", "Inviata al magazzino"};
+            String[] headers = {"Socio", "Prodotto", "Quantità", "Sostenitore", "Ricavo (€)", "Data Prenotazione", "Inviata al magazzino", "Note", "Data Spedizione"};
             for (int i = 0; i < headers.length; i++) {
                 Cell cell = headerRow.createCell(i);
                 cell.setCellValue(headers[i]);
@@ -245,6 +247,9 @@ public class SocioController {
                 row.createCell(4).setCellValue(p.getRicavo() != null ? p.getRicavo().doubleValue() : 0);
                 row.createCell(5).setCellValue(p.getDataPrenotazione() != null ? p.getDataPrenotazione().toString() : "");
                 row.createCell(6).setCellValue(p.isElencoPas() ? "✓" : "");
+                row.createCell(7).setCellValue(p.getNote());
+                row.createCell(8).setCellValue(p.getDataSalvataggioTracciamento() != null ? p.getDataPrenotazione().toString() : "");
+
             }
 
             // Adatta larghezza colonne automaticamente

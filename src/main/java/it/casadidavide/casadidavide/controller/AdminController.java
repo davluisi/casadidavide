@@ -135,7 +135,7 @@ public class AdminController {
             clienti = clienteService.findAllByOrderByNominativo(); // già ordinati
         }
 
-        model.addAttribute("title", "Gestione clienti");
+        model.addAttribute("title", "Gestione sostenitori");
         model.addAttribute("clienti", clienti);
         model.addAttribute("query", query); // per mantenere il testo nella barra
         return "admin/configurazioni/gestione-clienti";
@@ -145,7 +145,7 @@ public class AdminController {
     // Mostra il form per aggiungere un nuovo cliente
     @GetMapping("/admin/configurazioni/gestione-clienti/aggiungi-cliente")
     public String mostraFormAggiuntaCliente(Model model) {
-        model.addAttribute("title", "Nuovo cliente");
+        model.addAttribute("title", "Nuovo sostenitore");
         model.addAttribute("cliente", new Cliente());
         return "admin/configurazioni/gestione-clienti/aggiungi-cliente";
     }
@@ -161,7 +161,7 @@ public class AdminController {
     @PostMapping("/admin/configurazioni/gestione-clienti/elimina/{id}")
     public String eliminaCliente(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         clienteService.deleteById(id);
-        redirectAttributes.addFlashAttribute("success", "Cliente eliminato con successo.");
+        redirectAttributes.addFlashAttribute("success", "Sostenitore eliminato con successo.");
         return "redirect:/admin/configurazioni/gestione-clienti";
     }
 
@@ -169,9 +169,9 @@ public class AdminController {
     @GetMapping("/admin/configurazioni/gestione-clienti/modifica/{id}")
     public String mostraFormModificaCliente(@PathVariable Long id, Model model) {
         Cliente cliente = clienteService.findById(id)
-            .orElseThrow(() -> new IllegalArgumentException("Cliente non trovato con id: " + id));
+            .orElseThrow(() -> new IllegalArgumentException("Sostenitore non trovato con id: " + id));
         model.addAttribute("cliente", cliente);
-        model.addAttribute("title", "Modifica cliente");
+        model.addAttribute("title", "Modifica sostenitore");
         return "admin/configurazioni/gestione-clienti/modifica-cliente";
     }
 
@@ -191,6 +191,7 @@ public class AdminController {
         cliente.setTelefonoFisso(clienteModificato.getTelefonoFisso());
         cliente.setFax(clienteModificato.getFax());
         cliente.setPec(clienteModificato.getPec());
+        cliente.setNote(clienteModificato.getNote());
 
         clienteService.save(cliente);
 

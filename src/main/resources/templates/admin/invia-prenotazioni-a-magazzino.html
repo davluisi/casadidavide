@@ -35,6 +35,7 @@
                             <th>Cliente</th>
                             <th>Ricavo</th>
                             <th>Data</th>
+                            <th>Note</th>
                             <th class="col-min text-center">Invia</th>
                         </tr>
                     </thead>
@@ -46,6 +47,7 @@
                             <td th:text="${p.cliente.nominativo}"></td>
                             <td th:text="'€' + ${p.ricavo}"></td>
                             <td th:text="${#temporals.format(p.dataPrenotazione, 'dd/MM/yyyy')}"></td>
+                            <td th:text="${p.note}"></td>
                             <td class="text-center">
                                 <input type="checkbox" name="prenotazioniIds"
                                        th:value="${p.id}" />

@@ -124,7 +124,7 @@ public class CorriereController {
             model.addAttribute("campagna", campagna);
         }
         model.addAttribute("cliente", cliente);
-        model.addAttribute("title", "Dettagli cliente");
+        model.addAttribute("title", "Dettagli sostenitore");
 
         return "corrieri/dettagli-cliente";
     }
@@ -232,7 +232,7 @@ public class CorriereController {
 
             // Intestazioni
             Row headerRow = sheet.createRow(0);
-            String[] headers = {"Prodotto", "Quantità", "Data Prenotazione", "Cliente", "Indirizzo Spedizione"};
+            String[] headers = {"Prodotto", "Quantità", "Data Prenotazione", "Sostenitore", "Email", "Indirizzo Spedizione", "Note"};
             for (int i = 0; i < headers.length; i++) {
                 Cell cell = headerRow.createCell(i);
                 cell.setCellValue(headers[i]);
@@ -246,7 +246,10 @@ public class CorriereController {
                 row.createCell(1).setCellValue(p.getQuantita());
                 row.createCell(2).setCellValue(p.getDataPrenotazione() != null ? p.getDataPrenotazione().toString() : "");
                 row.createCell(3).setCellValue(p.getCliente().getNominativo());
-                row.createCell(4).setCellValue(p.getCliente().getIndirizzoSpedizione());
+                row.createCell(4).setCellValue(p.getCliente().getEmail());
+                row.createCell(5).setCellValue(p.getCliente().getIndirizzoSpedizione());
+                row.createCell(6).setCellValue(p.getNote());
+
             }
 
             // Adatta larghezza colonne automaticamente
@@ -285,7 +288,7 @@ public class CorriereController {
 
             // Intestazioni
             Row headerRow = sheet.createRow(0);
-            String[] headers = {"Prodotto", "Quantità", "Cliente", "Indirizzo", "Data Prenotazione", "Tracciamento"};
+            String[] headers = {"Prodotto", "Quantità", "Sostenitore","Email", "Indirizzo", "Data Prenotazione", "Tracciamento"};
             for (int i = 0; i < headers.length; i++) {
                 Cell cell = headerRow.createCell(i);
                 cell.setCellValue(headers[i]);
@@ -298,9 +301,10 @@ public class CorriereController {
                 row.createCell(0).setCellValue(p.getProdotto().getDescrizioneProdotto());
                 row.createCell(1).setCellValue(p.getQuantita());
                 row.createCell(2).setCellValue(p.getCliente().getNominativo());
-                row.createCell(3).setCellValue(p.getCliente().getIndirizzoSpedizione());
-                row.createCell(4).setCellValue(p.getDataPrenotazione() != null ? p.getDataPrenotazione().toString() : "");
-                row.createCell(5).setCellValue(p.getTracciamentoSpedizione());
+                row.createCell(3).setCellValue(p.getCliente().getEmail());
+                row.createCell(4).setCellValue(p.getCliente().getIndirizzoSpedizione());
+                row.createCell(5).setCellValue(p.getDataPrenotazione() != null ? p.getDataPrenotazione().toString() : "");
+                row.createCell(6).setCellValue(p.getTracciamentoSpedizione());
             }
 
             // Adatta larghezza colonne

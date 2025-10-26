@@ -68,9 +68,9 @@
  <div class="row mb-3">
     <!-- Cliente (2/3) -->
     <div class="col-md-8">
-        <label for="idCliente" class="form-label text-white">Cliente</label>
+        <label for="idCliente" class="form-label text-white">Sostenitore</label>
         <select id="idCliente" name="idCliente" class="form-select select2" required>
-            <option value="" disabled selected>Seleziona un cliente...</option>
+            <option value="" disabled selected>Seleziona un sostenitore...</option>
             <option th:each="cliente : ${clienti}" 
                     th:value="${cliente.id}" 
                     th:text="${cliente.nominativo}">
@@ -87,6 +87,21 @@
     </div>
 </div>
 
+<!-- NOTE (opzionale) -->
+      <div class="mb-3">
+        <label for="note" class="form-label text-white">Note (opzionale)</label>
+        <textarea id="note"
+                  name="note"
+                  class="form-control"
+                  rows="3"
+                  maxlength="500"
+                  placeholder="Aggiungi eventuali indicazioni (es. consegna, preferenze, urgenze)..."
+                  th:text="${note}"></textarea>
+        <div class="form-text text-white">
+          <span id="noteCounter">0</span>/500
+        </div>
+      </div>
+
 
             <!-- Pulsante invio -->
  <div class="text-center mt-3">
@@ -97,7 +112,7 @@
 <script>
     $(document).ready(function() {
         $('.select2').select2({
-            placeholder: "Seleziona un cliente...",
+            placeholder: "Seleziona un sostenitore...",
             allowClear: true,
             width: '100%',
             language: {
