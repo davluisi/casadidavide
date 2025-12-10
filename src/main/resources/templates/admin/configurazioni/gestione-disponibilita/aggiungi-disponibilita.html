@@ -3,113 +3,63 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}"
       th:with="page='aggiungi-disponibilita'">
-
-<head>
-    <title>Aggiungi disponibilità</title>
-
-    <!-- Select2 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-
-    <!-- jQuery + Select2 -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
-    <style>
-        /* ---------- SELECT2 ---------- */
-        .select2-container--default .select2-selection--single {
-            background-color: #fff;
-            color: #000;
-        }
-        .select2-selection__rendered,
-        .select2-selection__placeholder {
-            color: #000 !important;
-        }
-        .select2-container--default .select2-results > .select2-results__options {
-            background-color: #fff;
-            color: #000;
-        }
-        .select2-container--default .select2-results__option--highlighted[aria-selected] {
-            background-color: #cce5ff !important;
-            color: #000 !important;
-        }
-        .select2-container--default .select2-search--dropdown .select2-search__field {
-            background-color: #fff;
-            color: #000;
-        }
-
-        /* ---------- LAYOUT ---------- */
-        .row-flex {
-            display: flex;
-            flex-wrap: nowrap;
-            align-items: flex-end;
-            gap: 15px;
-        }
-
-        .col-prodotto {
-            flex: 0 0 60%;
-        }
-
-        .col-quantita {
-            flex: 0 0 15%;
-        }
-
-        .col-data {
-            flex: 0 0 25%;
-        }
-
-        @media (max-width: 992px) {
-            .row-flex {
-                flex-wrap: wrap;
-            }
-            .col-prodotto, .col-quantita, .col-data {
-                flex: 1 1 100%;
-            }
-        }
-    </style>
-</head>
-
 <body>
 <section layout:fragment="content">
-    <div class="container">
 
-        <!-- Pulsante per tornare indietro -->
-        <div class="d-flex justify-content-start mb-4">
-            <a th:href="@{'/admin/configurazioni/gestione-disponibilita/disponibilita-campagna/' + ${campagna.id}}" 
-               class="btn btn-secondary">←</a>
-        </div>
+		<!-- Titolo dinamico -->
+        <h1 class="mb-4" th:text="'per ' + ${campagna.descrizioneCampagna}"></h1>
+    
+    <div class="row justify-content-center">
+        <div class="col-md-10 content-card"> <div class="d-flex justify-content-start mb-4">
+                <a th:href="@{'/admin/configurazioni/gestione-disponibilita/disponibilita-campagna/' + ${campagna.id}}" 
+                   class="btn btn-secondary">←</a>
+            </div>
 
-        <!-- Titolo -->
-        <h2 class="mb-4 text-white">
-            Aggiungi disponibilità a: <span th:text="${campagna.descrizioneCampagna}"></span>
-        </h2>
+            <form th:action="@{'/admin/configurazioni/gestione-disponibilita/aggiungi/' + ${campagna.id}}" method="post">
 
-        <!-- Form -->
-        <form th:action="@{'/admin/configurazioni/gestione-disponibilita/aggiungi/' + ${campagna.id}}" method="post">
+                <div class="row mb-3">
+                    <div class="col-md-6"> <label for="idProdotto" class="form-label">Prodotto</label>
+                        <select id="idProdotto" name="idProdotto" class="form-select select2" required 
+                                data-placeholder="Seleziona un prodotto...">
+                            <option value=""></option> <option th:each="prodotto : ${prodotti}" 
+                                    th:value="${prodotto.id}" 
+                                    th:text="${prodotto.descrizioneProdotto}">
+                            </option>
+                        </select>
+                    </div>
 
-            <!-- PRIMA RIGA: prodotto + quantità + data -->
-            <div class="row-flex mb-4">
-                <div class="col-prodotto">
-                    <label for="idProdotto" class="form-label text-white">Prodotto</label>
-                    <select id="idProdotto" name="idProdotto" class="form-select select2" required 
-                            data-placeholder="Seleziona un prodotto...">
-                        <option value="" disabled selected>Seleziona un prodotto...</option>
-                        <option th:each="prodotto : ${prodotti}" 
-                                th:value="${prodotto.id}" 
-                                th:text="${prodotto.descrizioneProdotto}">
+                    <div class="col-md-3"> <label for="quantita" class="form-label">Quantità</label>
+                        <input type="number" class="form-control" id="quantita" name="quantita" min="1" required>
+                    </div>
+
+                    <div class="col-md-3"> <label for="dataCaricamento" class="form-label">Data</label>
+                        <input type="date" class="form-control" id="dataCaricamento" name="dataCaricamento" required>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="idSocio" class="form-label">Socio</label>
+                    <select id="idSocio" name="idSocio" class="form-select select2" required 
+                            data-placeholder="Seleziona il socio richiedente...">
+                        <option value=""></option> <option th:each="socio : ${soci}" 
+                                th:value="${socio.id}" 
+                                th:text="${socio.nominativo}">
                         </option>
                     </select>
                 </div>
 
-                <div class="col-quantita">
-                    <label for="quantita" class="form-label text-white">Quantità</label>
-                    <input type="number" class="form-control" id="quantita" name="quantita" min="1" required>
+                <div class="mb-3">
+                    <label for="note" class="form-label">Note (facoltative)</label>
+                    <textarea class="form-control" id="note" name="note" rows="3" placeholder="Eventuali annotazioni..."></textarea>
                 </div>
 
- <div class="col-data">
-    <label for="dataCaricamento" class="form-label text-white">Data</label>
-    <input type="date" class="form-control" id="dataCaricamento" name="dataCaricamento" required>
-    <script>
-        // Imposta la data odierna automaticamente nel campo
+                <div class="d-grid mt-4">
+                    <button type="submit" class="btn btn-success btn-lg px-4">Salva disponibilità</button>
+                </div>
+
+            </form>
+            
+        </div> </div> <script>
         document.addEventListener("DOMContentLoaded", function() {
             const today = new Date();
             const yyyy = today.getFullYear();
@@ -118,54 +68,7 @@
             document.getElementById("dataCaricamento").value = `${yyyy}-${mm}-${dd}`;
         });
     </script>
-</div>
-
-            </div>
-
-            <!-- SECONDA RIGA: socio -->
-            <div class="mb-3">
-                <label for="idSocio" class="form-label text-white">Socio</label>
-                <select id="idSocio" name="idSocio" class="form-select select2" required data-placeholder="Seleziona un socio...">
-                    <option value="" disabled selected>Seleziona il socio richiedente...</option>
-                    <option th:each="socio : ${soci}" 
-                            th:value="${socio.id}" 
-                            th:text="${socio.nominativo}">
-                    </option>
-                </select>
-            </div>
-
-            <!-- NOTE -->
-            <div class="mb-3">
-                <label for="note" class="form-label text-white">Note (facoltative)</label>
-                <textarea class="form-control" id="note" name="note" rows="3" placeholder="Eventuali annotazioni..."></textarea>
-            </div>
-
-            <!-- PULSANTE -->
-            <div class="d-flex justify-content-end">
-                <button type="submit" class="btn btn-success px-4">Salva disponibilità</button>
-            </div>
-
-        </form>
-
-        <!-- Script Select2 -->
-        <script>
-            $(document).ready(function() {
-                $('.select2').each(function () {
-                    $(this).select2({
-                        placeholder: $(this).data('placeholder'),
-                        allowClear: true,
-                        width: '100%',
-                        dropdownParent: $(this).parent(),
-                        language: {
-                            noResults: function() {
-                                return "Nessun risultato trovato";
-                            }
-                        }
-                    });
-                });
-            });
-        </script>
-    </div>
-</section>
+    
+    </section>
 </body>
 </html>

@@ -6,19 +6,15 @@
 
 <head>
 
-<style>
-    .col-min {
-        width: 1%;
-        white-space: nowrap; 
-    }
-</style>
-
     <title th:text="${title}">Elenco prenotazioni effettuate</title>
 </head>
 
 <body>
 <section layout:fragment="content">
     <div class="container">
+    
+     <!-- Titolo dinamico -->
+        <h1 class="mb-4 text-navy"><span th:text="${campagna.descrizioneCampagna}"></span></h1>
 
  <!-- Pulsanti -->
 <div class="d-flex justify-content-between mb-4">
@@ -28,27 +24,21 @@
         📄 Esporta in Excel
     </a>
 </div>
-
-
-        <!-- Titolo dinamico -->
-        <h2 class="mb-4 text-white">Campagna: <span th:text="${campagna.descrizioneCampagna}"></span></h2>
-
-		
 		
         <!-- Tabella prenotazioni -->
         <div class="table-responsive">
-            <table class="table table-bordered table-hover table-striped align-middle text-white">
+            <table class="table table-hover align-middle">
                 <thead class="table-dark">
                     <tr>
-                        <th>Socio</th>
+                        <th class="col-min">Socio</th>
                         <th>Prodotto</th>
-                        <th class="col-min text-center">Quantità</th>
-                        <th>Sostenitore</th>
-                        <th>Ricavo</th>
-                        <th>Data</th>
+                        <th class="col-min">Quant.</th>
+                        <th class="col-min">Sostenitore</th>
+                        <th class="col-min">Ricavo</th>
+                        <th class="col-min">Data prenot.</th>
                         <th>Note</th>
-                        <th>Inviata al magazzino</th> <!-- class="col-min text-center" -->
-                        <th>Data spedizione</th>
+                        <th class="col-min">Inviata al mag.</th>
+                        <th class="col-min">Data spedizione</th>
                         
                     </tr>
                 </thead>
@@ -59,12 +49,12 @@
                         <td class="text-center" th:text="${p.quantita}"></td>
                         <td th:text="${p.cliente.nominativo}"></td>
                         <td th:text="'€' + ${p.ricavo}"></td>
-                        <td th:text="${#temporals.format(p.dataPrenotazione, 'dd/MM/yyyy')}"></td>
+                        <td class="text-center" th:text="${#temporals.format(p.dataPrenotazione, 'dd/MM/yyyy')}"></td>
                         <td th:text="${p.note}"></td>
                         <td class="text-center">
 						    <span th:if="${p.elencoPas}" class="text-success fw-bold">&#10003;</span>
 						</td>
-                        <td th:text="${#temporals.format(p.dataSalvataggioTracciamento, 'dd/MM/yyyy')}"></td>
+                        <td class="text-center" th:text="${#temporals.format(p.dataSalvataggioTracciamento, 'dd/MM/yyyy')}"></td>
 						
 
                         

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      th:with="page='resi'">
+
+<head>
+    <title th:text="${title}">Resi</title>
+</head>
+
+<body>
+<section layout:fragment="content">
+
+    <div class="container">
+    
+        <!-- Pulsante per tornare indietro -->
+        <div class="d-flex justify-content-start mb-4">
+            <a th:href="@{'/home'}" class="btn btn-secondary">←</a>
+        </div>
+    	
+	    <!-- Tabella Campagne -->
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead>
+                    <tr>
+                        <th>Campagne</th>
+                        <th>Spedizioni effettuate</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="campagna : ${campagne}">
+                        <td th:text="${campagna.descrizioneCampagna}"></td>
+                        <td class="text-center">
+				            <a th:href="@{'/soci/resi/vedi-spedizioni/' + ${campagna.id}}"
+				               class="btn btn-primary btn-sm">Elenco spedizioni</a>
+				        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</section>
+</body>
+</html>

@@ -4,33 +4,48 @@
       layout:decorate="~{layout}"
       th:with="page='consegne-da-elaborare'">
 
-<head>
-</head>
-
 <body>
 <section layout:fragment="content">
     <div class="container">
 
-       
-        
         <!-- Pulsante Indietro -->
         <div class="d-flex justify-content-start mb-4">
-            <a th:href="@{/corrieri/scegli-campagna-da-spedire}" class="btn btn-secondary">←</a>
+            <a th:href="@{/corrieri/consegne}" class="btn btn-secondary">←</a>
         </div>
         
         <!-- Pulsante Esporta in XLS -->
-<div class="d-flex justify-content-end mb-3">
-    <a th:href="@{'/corrieri/consegne-da-elaborare/esporta-xls/' + ${campagna.id}}" 
-       class="btn btn-success">
-        📦 Esporta in XLS
-    </a>
-</div>
+		<div class="d-flex justify-content-end mb-3">
+		    <a th:href="@{'/corrieri/consegne-da-elaborare/esporta-xls/' + ${campagna.id}}" 
+		       class="btn btn-success">
+		        📦 Esporta in XLS
+		    </a>
+		</div>
         
+        <!-- Menu a tendina "Ordina per" -->
+        <div class="row justify-content-end mb-3">
+            <div class="col-md-4">
+                <form method="GET" th:action="@{/corrieri/consegne-da-elaborare}" class="d-flex align-items-center">
+                    
+                    <input type="hidden" name="idCampagna" th:value="${campagna.id}" />
+
+                    <label for="sort" class="form-label me-2 mb-0">Ordina per:</label>
+                    
+                    <select id="sort" name="sort" class="form-select" onchange="this.form.submit()">
+                        <option value="data" th:selected="${currentSort == 'data'}">
+                            Data (Default)
+                        </option>
+                        <option value="sostenitore" th:selected="${currentSort == 'sostenitore'}">
+                            Sostenitore (A-Z)
+                        </option>
+                    </select>
+                </form>
+            </div>
+        </div>
 
         <!-- Tabella prenotazioni da elaborare -->
         <div class="table-responsive">
-            <table class="table table-bordered table-hover table-striped align-middle text-white">
-                <thead class="table-dark">
+            <table class="table table-hover align-middle text-white">
+                <thead>
                     <tr>
                         <th>Prodotto</th>
                         <th>Quantità</th>
@@ -49,17 +64,14 @@
                         <td th:text="${#temporals.format(p.dataPrenotazione, 'dd/MM/yyyy')}"></td>
                         <td>
                             <a th:href="@{/corrieri/dettagli-cliente/{idCliente}(idCliente=${p.cliente.id}, idCampagna=${p.campagna.id})}"
-   th:text="${p.cliente.nominativo}"></a>
-
+   								th:text="${p.cliente.nominativo}"></a>
                         </td>
                         <td th:text="${p.cliente.email}"></td>
                         <td th:text="${p.cliente.indirizzoSpedizione}"></td>
                         <td th:text="${p.note}"></td>
-                        <td>
+                        <td class="text-center">
                             <a th:href="@{'/corrieri/elabora-spedizione/' + ${p.id}}"
-                               class="btn btn-sm btn-primary">
-                                Inserisci tracciamento spedizione
-                            </a>
+                               class="btn btn-sm btn-primary">Inserisci link</a>
                         </td>
                     </tr>
                 </tbody>

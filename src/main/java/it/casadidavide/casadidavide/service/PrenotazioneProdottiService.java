@@ -44,6 +44,11 @@ public class PrenotazioneProdottiService {
 		return repository
 				.findByElencoPasFalseOrderByDataPrenotazioneDesc();
 	}
+	
+	public List<PrenotazioneProdotti> findPrenotazioniSpedite(Campagna campagna) {
+		return repository
+				.findPrenotazioniSpedite(campagna);
+	}
 
 	public void setElencoPasTrue(Long id) {
 	    PrenotazioneProdotti p = repository.findById(id)

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      th:with="page='effettua-reso'">
+      
+<head>
+</head>
+
+<body>
+<section layout:fragment="content">
+
+		<!-- Titolo dinamico -->
+        <h1 class="mb-4 text-navy"><span th:text="${spedizione.prodotto.descrizioneProdotto}"></span></h1>
+
+		<!-- Tasto indietro -->
+    <div class="row justify-content-center">
+        <div class="col-md-10 content-card"> <div class="d-flex justify-content-start mb-4">
+                <a th:href="@{'/soci/resi/vedi-spedizioni/' + ${campagna.id}}" class="btn btn-secondary">←</a>
+           </div>
+
+            <form th:action="@{'/soci/resi/vedi-spedizioni/' + ${campagna.id} + '/effettua-reso/' + ${spedizione.id}}" method="post">
+
+
+                <div class="col-md-4">
+                    <label for="quantita" class="form-label">Quantità</label>
+                    <input type="number" class="form-control" id="quantita" name="quantita" 
+                           th:attr="max=${spedizione.quantitaReale}" min="1" required>
+                    <div class_ th:text="'Quantità massima: ' + ${spedizione.quantitaReale}" 
+                         class="form-text"></div> </div>
+
+              <div class="text-center mt-4">
+                <button type="submit" class="btn btn-success btn-lg px-4">Conferma</button>
+              </div>
+
+            </form>
+        
+        </div> </div> 
+</section>
+</body>
+</html>

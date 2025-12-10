@@ -24,7 +24,7 @@
 		    <a th:href="@{/admin/configurazioni/gestione-soci/richieste-abilitazione}" class="btn btn-warning">Richieste Abilitazione</a>
 		</div>
     
-    <!-- Barra di ricerca -->
+    	<!-- Barra di ricerca -->
 		<form th:action="@{/admin/configurazioni/gestione-soci}" method="get" class="mb-4">
 		    <div class="input-group">
 		        <input type="text" class="form-control" placeholder="Cerca" name="query" th:value="${query}">
@@ -35,8 +35,8 @@
     	
 	    <!-- Tabella Soci -->
         <div class="table-responsive">
-            <table class="table table-bordered table-hover table-striped align-middle text-white">
-                <thead class="table-dark">
+            <table class="table table-hover align-middle">
+                <thead>
                     <tr>
                         <th>Nominativo</th>
                         <th>Ruolo</th>
@@ -47,16 +47,8 @@
                     <tr th:each="socio : ${soci}">
                         <td th:text="${socio.nominativo}"></td>
                         <td th:text="${socio.ruolo}"></td>
-                        <td>
+                        <td class="text-center">
                             <a th:href="@{'/admin/configurazioni/gestione-soci/modifica/' + ${socio.id}}" class="btn btn-warning btn-sm me-2">Modifica</a>
-                            
-                            <!-- Tasto "elimina" disabilitato 
-	                            <form th:action="@{'/admin/configurazioni/gestione-soci/elimina/' + ${socio.id}}"
-	                                  method="post" th:object="${socio}" style="display:inline"
-	                                  onsubmit="return confermaEliminazione()">
-	                                <button type="submit" class="btn btn-danger btn-sm">Elimina</button>
-	                            </form>
-                            -->
                         </td>
                     </tr>
                 </tbody>

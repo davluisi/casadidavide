@@ -31,6 +31,10 @@ public class PrenotazioneProdotti {
 
     @Column
     private int quantita;
+    
+    @Column(name = "quantita_reale")
+    private int quantitaReale;
+    
     @Column(name="data_prenotazione")
     private LocalDate dataPrenotazione;
     
@@ -56,6 +60,12 @@ public class PrenotazioneProdotti {
     
 	public Long getId() {
 		return id;
+	}
+	public int getQuantitaReale() {
+		return quantitaReale;
+	}
+	public void setQuantitaReale(int quantitaReale) {
+		this.quantitaReale = quantitaReale;
 	}
 	public String getNote() {
 		return note;

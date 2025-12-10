@@ -1,5 +1,5 @@
 package it.casadidavide.casadidavide.config;
-
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import it.casadidavide.casadidavide.service.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -39,12 +39,19 @@ public class SecurityConfig {
     public AuthenticationManager authManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
+    
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        // Diciamo a Spring Security di IGNORARE completamente
+        // qualsiasi richiesta che inizi con /uploads/
+        return (web) -> web.ignoring().requestMatchers("/uploads/**", "/css/**", "/js/**");
+    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/","/login","/registrazione", "/css/**", "/js/**").permitAll()
+                .requestMatchers("/","/login","/registrazione","/recupera-password", "/reset-password").permitAll()
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form

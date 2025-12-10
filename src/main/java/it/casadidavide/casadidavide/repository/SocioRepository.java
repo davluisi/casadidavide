@@ -14,4 +14,7 @@ public interface SocioRepository extends JpaRepository<Socio, Long> {
 
     List<Socio> findAllByOrderByNominativoAsc();
 	List<Socio> findByAbilitatoTrueAndNominativoContainingIgnoreCaseOrderByNominativoAsc(String nominativo);
+	
+	Optional<Socio> findByEmail(String email);
+	Optional<Socio> findByResetPasswordToken(String token);
 }

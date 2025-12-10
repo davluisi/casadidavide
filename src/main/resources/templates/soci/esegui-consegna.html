@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      th:with="page='esegui-consegna'">
+
+<body>
+<section layout:fragment="content">
+
+    <div class="row justify-content-center">
+        <div class="col-md-6 content-card">
+            
+            <div class="d-flex justify-content-start mb-4">
+                <form th:action="@{/soci/consegna-mano}" method="post">
+                    <input type="hidden" name="idCampagna" th:value="${disponibilita.campagna.id}" />
+                    <button type="submit" class="btn btn-secondary">←</button>
+                </form>
+            </div>
+
+            <div class="text-center mb-4">
+                <h2>Effettua Consegna</h2>
+                <h4 class="text-muted" 
+                    th:text="|Consegna a mano di ${disponibilita.prodotto.descrizioneProdotto}|">
+                    Consegna a mano di Prodotto X
+                </h4>
+                <p>Quantità massima disponibile: <strong th:text="${disponibilita.quantita}">10</strong></p>
+            </div>
+
+            <form th:action="@{/soci/salva-consegna}" method="post">
+                
+                <input type="hidden" name="idDisponibilita" th:value="${disponibilita.id}" />
+
+                <div class="mb-4">
+                    <label for="quantita" class="form-label">Quantità da consegnare</label>
+                    <input type="number" 
+                           id="quantita" 
+                           name="quantita" 
+                           class="form-control form-control-lg" 
+                           min="1" 
+                           th:max="${disponibilita.quantita}" 
+                           required 
+                           placeholder="Inserisci quantità">
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-success btn-lg">Conferma</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+</section>
+</body>
+</html>

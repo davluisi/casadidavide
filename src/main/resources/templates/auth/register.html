@@ -29,24 +29,24 @@
 <body>
 <section layout:fragment="content">
 
-    <div th:if="${error}" class="alert alert-danger text-center mt-3" th:text="${error}"></div>
-
     <div class="row justify-content-center">
-        <div class="col-md-10">
+        
+        <div class="col-md-10 content-card">
+        
+        <!-- Pulsante per tornare indietro -->
+        <div class="d-flex justify-content-start mb-4">
+            <a th:href="@{'/login'}" class="btn btn-secondary">←</a>
+        </div>
+
+            <div th:if="${error}" class="alert alert-danger text-center" th:text="${error}"></div>
 
             <form th:action="@{/registrazione}" method="post" th:object="${socio}" class="mt-4" onsubmit="return verificaPassword()">
 
-				<div class="text-center mt-4 mb-5">
-                    <a th:href="@{/login}" class="btn btn-secondary">Torna al login</a>
-                </div>
-
-                <!-- Nominativo -->
                 <div class="mb-3">
                     <label class="form-label">Nome e Cognome</label>
                     <input type="text" name="nominativo" class="form-control" required th:value="*{nominativo}">
                 </div>
 
-                <!-- Email e Username -->
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Email</label>
@@ -58,7 +58,6 @@
                     </div>
                 </div>
 
-                <!-- Password -->
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Password</label>
@@ -70,7 +69,6 @@
                     </div>
                 </div>
 
-                <!-- Ruolo -->
                 <div class="mb-3">
                     <label class="form-label">Ruolo</label>
                     <select name="ruolo" class="form-select" required>
@@ -80,13 +78,11 @@
                     </select>
                 </div>
 
-                <!-- Data di nascita -->
                 <div class="mb-3">
                     <label class="form-label">Data di nascita</label>
                     <input type="date" name="dataNascita" class="form-control" required th:value="*{dataNascita}">
                 </div>
 
-                <!-- Indirizzo di residenza -->
                 <h5>Indirizzo di Residenza</h5>
                 <div class="row">
                     <div class="col-md-6 mb-3">
@@ -109,7 +105,6 @@
                     </div>
                 </div>
 
-                <!-- Indirizzo di domicilio -->
                 <h5 class="mt-4">Indirizzo di Domicilio</h5>
                 <div class="form-check mb-3">
                     <input class="form-check-input" type="checkbox" id="stessoIndirizzo" onchange="copiaIndirizzo()">
@@ -139,13 +134,15 @@
                 </div>
 
                 <div class="d-grid mt-4">
-                    <button type="submit" class="btn btn-success">Registrati</button>
+                    <button type="submit" class="btn btn-success btn-lg">Registrati</button>
                 </div>
 
+                <div class="text-center mt-4">
+                    <a th:href="@{/login}" style="color: navy;">Hai già un account? Torna al login</a>
+                </div>
                 
             </form>
-        </div>
-    </div>
+        </div> </div>
 </section>
 </body>
 </html>

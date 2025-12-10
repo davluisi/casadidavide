@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"
+      th:with="page='vedi-spedizioni-campagna'">
+
+<head>
+
+    <title th:text="${title}">Elenco spedizioni effettuate</title>
+</head>
+
+<body>
+<section layout:fragment="content">
+    <div class="container">
+    
+     <!-- Titolo dinamico -->
+        <h1 class="mb-4 text-navy"><span th:text="${campagna.descrizioneCampagna}"></span></h1>
+
+ <!-- Pulsante indietro -->
+<div class="d-flex justify-content-between mb-4">
+    <a th:href="@{/soci/resi}" class="btn btn-secondary">←</a>
+</div>
+		
+        <!-- Tabella prenotazioni -->
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th class="col-min">Socio</th>
+                        <th>Prodotto</th>
+                        <th class="col-min">Quant. spedita</th>
+                        <th class="col-min">Quant. resa</th>
+                        <th class="col-min">Sostenitore</th>
+                        <th class="col-min">Data prenot.</th>
+                        <th>Note</th>
+                        <th class="col-min">Data spedizione</th>
+                        <th>Effettua reso</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="p : ${spedizioni}">
+                        <td th:text="${p.socio.nominativo}"></td>
+                        <td th:text="${p.prodotto.descrizioneProdotto}"></td>
+                        <td class="text-center" th:text="${p.quantita}"></td>
+                        <td class="text-center" th:text="${p.quantita - p.quantitaReale}"></td>
+                        <td th:text="${p.cliente.nominativo}"></td>
+                        <td class="text-center" th:text="${#temporals.format(p.dataPrenotazione, 'dd/MM/yyyy')}"></td>
+                        <td th:text="${p.note}"></td>
+                        <td class="text-center" th:text="${#temporals.format(p.dataSalvataggioTracciamento, 'dd/MM/yyyy')}"></td>
+						<td class="text-center">
+				            <a th:href="@{'/soci/resi/vedi-spedizioni/' + ${p.campagna.id} + '/effettua-reso/' + ${p.id}}"
+				               class="btn btn-primary btn-sm">Effettua un reso</a>
+				        </td>                     
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</section>
+</body>
+</html>

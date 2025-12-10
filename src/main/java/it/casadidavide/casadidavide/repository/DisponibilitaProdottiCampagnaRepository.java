@@ -13,8 +13,7 @@ import org.springframework.data.repository.query.Param;
 
 public interface DisponibilitaProdottiCampagnaRepository extends JpaRepository<DisponibilitaProdottiCampagna, Long> {
 
-	List<DisponibilitaProdottiCampagna> findByCampagnaOrderByProdotto_DescrizioneProdotto(Campagna campagna);
-
+	List<DisponibilitaProdottiCampagna> findByCampagnaAndQuantitaGreaterThanOrderByProdotto_DescrizioneProdotto(Campagna campagna, int quantita);
 	void deleteByCampagnaAndProdotto(Campagna campagna, Prodotto prodotto);
 
 	Optional<DisponibilitaProdottiCampagna> findByCampagnaAndProdotto(Campagna campagna, Prodotto prodotto);

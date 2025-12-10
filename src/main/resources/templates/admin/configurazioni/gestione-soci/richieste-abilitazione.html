@@ -22,7 +22,8 @@
             <p class="text-center">Non ci sono richieste in attesa.</p>
         </div>
 
-        <table class="table table-striped" th:if="${!#lists.isEmpty(soci)}">
+        <div class="table-responsive">
+        <table class="table table-hover align-middle" th:if="${!#lists.isEmpty(soci)}">
             <thead>
                 <tr>
                     <th>Nominativo</th>
@@ -34,7 +35,7 @@
                 <tr th:each="socio : ${soci}">
                     <td th:text="${socio.nominativo}"></td>
                     <td th:text="${socio.ruolo}"></td>
-                    <td>
+                    <td class="text-center">
                         <form th:action="@{/admin/configurazioni/gestione-soci/abilita-account}" method="post" style="display:inline">
                             <input type="hidden" name="id" th:value="${socio.id}" />
                             <button type="submit" class="btn btn-success btn-sm">Abilita</button>
@@ -49,6 +50,7 @@
                 </tr>
             </tbody>
         </table>
+        </div>
     </div>
 </section>
 </body>

@@ -4,13 +4,13 @@
       layout:decorate="~{layout}"
       th:with="page='storico-caricamenti'">
 
-<head>
-    <title th:text="${title}">Storico Caricamenti</title>
-</head>
-
 <body>
 <section layout:fragment="content">
     <div class="container">
+    
+    	<!-- Titolo dinamico -->
+        <h1 class="mb-4" th:text="'di ' + ${prodotto.descrizioneProdotto}"></h1>
+        <h1 class="mb-4" th:text="'per ' + ${campagna.descrizioneCampagna}"></h1>
 
         <!-- Pulsante per tornare indietro -->
         <div class="d-flex justify-content-start mb-4">
@@ -21,20 +21,20 @@
 
         <!-- Tabella storico -->
         <div class="table-responsive">
-            <table class="table table-bordered table-hover table-striped align-middle text-white">
-                <thead class="table-dark">
+            <table class="table table-hover align-middle">
+                <thead>
                     <tr>
                         <th>Socio</th>
                         <th>Data Caricamento</th>
                         <th>Quantità</th>
-                        <th class="text-center">Azioni</th>
+                        <th>Azioni</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr th:each="carico : ${storico}">
                         <td th:text="${carico.socio.nominativo}"></td>
-                        <td th:text="${#temporals.format(carico.data, 'dd/MM/yyyy')}"></td>
-                        <td th:text="${carico.quantita}"></td>
+                        <td class="text-center" th:text="${#temporals.format(carico.data, 'dd/MM/yyyy')}"></td>
+                        <td class="text-center" th:text="${carico.quantita}"></td>
                         <td class="text-center">
                             <a th:href="@{'/admin/configurazioni/gestione-disponibilita/modifica-caricamento/' + ${carico.id}}" 
                                class="btn btn-warning btn-sm me-2">Modifica</a>

@@ -4,39 +4,33 @@
       layout:decorate="~{layout}"
       th:with="page='invia-prenotazioni-a-magazzino'">
 
-<head>
-    <title>Seleziona prenotazioni da inviare</title>
-    <style>
-        .col-min {
-            width: 1%;
-            white-space: nowrap;
-        }
-    </style>
-</head>
-
 <body>
 <section layout:fragment="content">
     <div class="container">
     
+		<!-- Titolo dinamico -->
+        <h1 class="mb-4 text-navy"><span th:text="${campagna.descrizioneCampagna}"></span></h1>    
+        
     	<!-- Pulsante per tornare indietro -->
         <div class="d-flex justify-content-start mb-4">
-            <a th:href="@{'/admin/scegli-campagna-invio-ordini'}" class="btn btn-secondary">←</a>
+            <a th:href="@{'/home'}" class="btn btn-secondary">←</a>
         </div>
-        <h2 class="text-white mb-4">Seleziona prenotazioni da inviare al magazzino</h2>
+        
+        <h2 class="mb-4">Seleziona le prenotazioni da inviare al magazzino</h2>
 
         <form th:action="@{/admin/conferma-invio-prenotazioni-a-magazzino}" method="post">
             <div class="table-responsive">
-                <table class="table table-bordered table-hover table-striped align-middle text-white">
-                    <thead class="table-dark">
+                <table class="table table-hover align-middle">
+                    <thead>
                         <tr>
                             <th>Socio</th>
                             <th>Prodotto</th>
-                            <th class="col-min text-center">Quantità</th>
-                            <th>Cliente</th>
-                            <th>Ricavo</th>
-                            <th>Data</th>
+                            <th class="col-min">Quantità</th>
+                            <th>Sostenitore</th>
+                            <th class="col-min">Ricavo</th>
+                            <th class="col-min">Data</th>
                             <th>Note</th>
-                            <th class="col-min text-center">Invia</th>
+                            <th class="col-min">Invia</th>
                         </tr>
                     </thead>
                     <tbody>

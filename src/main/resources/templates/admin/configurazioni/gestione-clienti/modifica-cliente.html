@@ -4,96 +4,87 @@
       layout:decorate="~{layout}"
       th:with="page='modifica-cliente'">
 
-<head>
-    <title>Modifica Cliente</title>
-</head>
-
 <body>
 <section layout:fragment="content">
 
-    <div class="container">
-
-        <!-- Pulsante per tornare a Gestione Clienti -->
-        <div class="d-flex justify-content-start mb-3">
-            <a th:href="@{/admin/configurazioni/gestione-clienti}" class="btn btn-secondary">←</a>
-        </div>
-
-
-        <!-- Form di modifica -->
-        <form th:action="@{'/admin/configurazioni/gestione-clienti/modifica/' + ${cliente.id}}" method="post">
-            <div class="mb-3">
-                <label for="nominativo" class="form-label">Nominativo</label>
-                <input type="text" class="form-control" id="nominativo" name="nominativo"
-                       th:value="${cliente.nominativo}" required>
+    <div class="row justify-content-center">
+        <div class="col-md-10 content-card"> <div class="d-flex justify-content-start mb-3">
+                <a th:href="@{/admin/configurazioni/gestione-clienti}" class="btn btn-secondary">←</a>
             </div>
 
-            <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" name="email"
-                       th:value="${cliente.email}" >
-            </div>
 
-            <div class="mb-3">
-                <label for="indirizzoSpedizione" class="form-label">Indirizzo di spedizione</label>
-                <input type="text" class="form-control" id="indirizzoSpedizione" name="indirizzoSpedizione"
-                       th:value="${cliente.indirizzoSpedizione}" >
-            </div>
+            <form th:action="@{'/admin/configurazioni/gestione-clienti/modifica/' + ${cliente.id}}" method="post">
+                <div class="mb-3">
+                    <label for="nominativo" class="form-label">Nominativo</label>
+                    <input type="text" class="form-control" id="nominativo" name="nominativo"
+                           th:value="${cliente.nominativo}" required>
+                </div>
 
-            <div class="mb-3">
-                <label for="comuneSpedizione" class="form-label">Comune di spedizione</label>
-                <input type="text" class="form-control" id="comuneSpedizione" name="comuneSpedizione"
-                       th:value="${cliente.comuneSpedizione}" >
-            </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email"
+                           th:value="${cliente.email}" >
+                </div>
 
-            <div class="mb-3">
-                <label for="provinciaSpedizione" class="form-label">Provincia di spedizione</label>
-                <input type="text" class="form-control" id="provinciaSpedizione" name="provinciaSpedizione"
-                       th:value="${cliente.provinciaSpedizione}" >
-            </div>
+                <div class="mb-3">
+                    <label for="indirizzoSpedizione" class="form-label">Indirizzo di spedizione</label>
+                    <input type="text" class="form-control" id="indirizzoSpedizione" name="indirizzoSpedizione"
+                           th:value="${cliente.indirizzoSpedizione}" >
+                </div>
 
-            <div class="mb-3">
-                <label for="nazioneSpedizione" class="form-label">Nazione di spedizione</label>
-                <input type="text" class="form-control" id="nazioneSpedizione" name="nazioneSpedizione"
-                       th:value="${cliente.nazioneSpedizione}" >
-            </div>
+                <div class="mb-3">
+                    <label for="comuneSpedizione" class="form-label">Comune di spedizione</label>
+                    <input type="text" class="form-control" id="comuneSpedizione" name="comuneSpedizione"
+                           th:value="${cliente.comuneSpedizione}" >
+                </div>
 
-            <div class="mb-3">
-                <label for="telefonoCellulare" class="form-label">Telefono cellulare</label>
-                <input type="text" class="form-control" id="telefonoCellulare" name="telefonoCellulare"
-                       th:value="${cliente.telefonoCellulare}" required>
-            </div>
+                <div class="mb-3">
+                    <label for="provinciaSpedizione" class="form-label">Provincia di spedizione</label>
+                    <input type="text" class="form-control" id="provinciaSpedizione" name="provinciaSpedizione"
+                           th:value="${cliente.provinciaSpedizione}" >
+                </div>
 
-            <div class="mb-3">
-                <label for="telefonoFisso" class="form-label">Telefono fisso (facoltativo)</label>
-                <input type="text" class="form-control" id="telefonoFisso" name="telefonoFisso"
-                       th:value="${cliente.telefonoFisso}">
-            </div>
+                <div class="mb-3">
+                    <label for="nazioneSpedizione" class="form-label">Nazione di spedizione</label>
+                    <input type="text" class="form-control" id="nazioneSpedizione" name="nazioneSpedizione"
+                           th:value="${cliente.nazioneSpedizione}" >
+                </div>
 
-            <div class="mb-3">
-                <label for="fax" class="form-label">Fax (facoltativo)</label>
-                <input type="text" class="form-control" id="fax" name="fax"
-                       th:value="${cliente.fax}">
-            </div>
+                <div class="mb-3">
+                    <label for="telefonoCellulare" class="form-label">Telefono cellulare</label>
+                    <input type="text" class="form-control" id="telefonoCellulare" name="telefonoCellulare"
+                           th:value="${cliente.telefonoCellulare}" required>
+                </div>
 
-            <div class="mb-3">
-                <label for="pec" class="form-label">PEC (facoltativa)</label>
-                <input type="email" class="form-control" id="pec" name="pec"
-                       th:value="${cliente.pec}">
-            </div>
-            
-            <div class="mb-3">
-                <label for="note" class="form-label">Note (facoltativo)</label>
-                <input type="text" class="form-control" id="note" name="note"
-                       th:value="${cliente.note}">
-            </div>
+                <div class="mb-3">
+                    <label for="telefonoFisso" class="form-label">Telefono fisso (facoltativo)</label>
+                    <input type="text" class="form-control" id="telefonoFisso" name="telefonoFisso"
+                           th:value="${cliente.telefonoFisso}">
+                </div>
 
-            <div class="d-grid">
-                <button type="submit" class="btn btn-primary">Salva modifiche</button>
-            </div>
-        </form>
+                <div class="mb-3">
+                    <label for="fax" class="form-label">Fax (facoltativo)</label>
+                    <input type="text" class="form-control" id="fax" name="fax"
+                           th:value="${cliente.fax}">
+                </div>
 
-    </div>
+                <div class="mb-3">
+                    <label for="pec" class="form-label">PEC (facoltativa)</label>
+                    <input type="email" class="form-control" id="pec" name="pec"
+                           th:value="${cliente.pec}">
+                </div>
+                
+                <div class="mb-3">
+                    <label for="note" class="form-label">Note (facoltativo)</label>
+                    <input type="text" class="form-control" id="note" name="note"
+                           th:value="${cliente.note}">
+                </div>
 
-</section>
+                <div class="d-grid mt-4">
+                    <button type="submit" class="btn btn-primary btn-lg">Salva modifiche</button>
+                </div>
+            </form>
+
+        </div> </div> </section>
 </body>
 </html>

@@ -5,130 +5,63 @@
       th:with="page='prenota-prodotto'">
       
 <head>
-<style>
-  /* Campo selezionato (chiuso) */
-  .select2-container--default .select2-selection--single {
-      background-color: #fff; /* Bianco */
-      color: #000; /* Testo nero */
-  }
-
-  .select2-selection__rendered,
-  .select2-selection__placeholder {
-      color: #000 !important; /* Testo nero, anche in placeholder */
-  }
-
-  /* Menu a tendina aperto: sfondo e testo */
-  .select2-container--default .select2-results > .select2-results__options {
-      background-color: #fff; /* Sfondo bianco */
-      color: #000; /* Testo nero */
-  }
-
-  /* Ogni voce nel dropdown */
-  .select2-container--default .select2-results__option {
-      color: #000; /* Forza testo nero */
-  }
-
-  /* Voce in evidenza (hover o attiva) */
-  .select2-container--default .select2-results__option--highlighted[aria-selected] {
-      background-color: #cce5ff !important; /* Colore evidenziazione (esempio) */
-      color: #000 !important; /* Testo nero per contrasto */
-  }
-
-  /* Barra di ricerca interna al dropdown */
-  .select2-container--default .select2-search--dropdown .select2-search__field {
-      background-color: #fff; /* Campo ricerca bianco */
-      color: #000; /* Testo nero */
-  }
-</style>
-    
-    <!-- Select2 CSS -->
-	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-	
-	<!-- jQuery (obbligatorio per Select2) -->
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	
-	<!-- Select2 JS -->
-	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-	    
-	
 </head>
 
 <body>
 <section layout:fragment="content">
-    <div class="container">
 
-        <!-- Pulsante per tornare indietro -->
-        <div class="d-flex justify-content-start mb-4">
-            <a th:href="@{'/soci/prenotazione-prodotti/disponibilita-prenotazione-campagna/' + ${campagna.id}}" class="btn btn-secondary">←</a>
-        </div>
+		<!-- Titolo dinamico -->
+        <h1 class="mb-4 text-navy"><span th:text="${prodotto.descrizioneProdotto}"></span></h1>
 
-        <!-- Form prenotazione -->
-        <form th:action="@{'/soci/prenotazione-prodotti/disponibilita-prenotazione-campagna/' + ${campagna.id} + '/prenota-prodotto/' + ${prodotto.id}}" method="post">
+    <div class="row justify-content-center">
+        <div class="col-md-10 content-card"> <div class="d-flex justify-content-start mb-4">
+                <a th:href="@{'/soci/prenotazione-prodotti/disponibilita-prenotazione-campagna/' + ${campagna.id}}" class="btn btn-secondary">←</a>
+            </div>
 
- <div class="row mb-3">
-    <!-- Cliente (2/3) -->
-    <div class="col-md-8">
-        <label for="idCliente" class="form-label text-white">Sostenitore</label>
-        <select id="idCliente" name="idCliente" class="form-select select2" required>
-            <option value="" disabled selected>Seleziona un sostenitore...</option>
-            <option th:each="cliente : ${clienti}" 
-                    th:value="${cliente.id}" 
-                    th:text="${cliente.nominativo}">
-            </option>
-        </select>
-    </div>
+            <form th:action="@{'/soci/prenotazione-prodotti/disponibilita-prenotazione-campagna/' + ${campagna.id} + '/prenota-prodotto/' + ${prodotto.id}}" method="post">
 
-    <!-- Quantità (1/3) -->
-    <div class="col-md-4">
-        <label for="quantita" class="form-label text-white">Quantità</label>
-        <input type="number" class="form-control" id="quantita" name="quantita" 
-               th:attr="max=${caricamento.quantita}" min="1" required>
-        <div class="form-text text-white" th:text="'Disponibilità massima: ' + ${caricamento.quantita}"></div>
-    </div>
-</div>
+              <div class="row mb-3">
+                <div class="col-md-8">
+                    <label for="idCliente" class="form-label">Sostenitore</label>
+                    <select id="idCliente" name="idCliente" class="form-select select2" required
+				        data-placeholder="Seleziona un sostenitore...">
+				    	<option value=""></option>
+                        <option th:each="cliente : ${clienti}" 
+                                th:value="${cliente.id}" 
+                                th:text="${cliente.nominativo}">
+                        </option>
+                    </select>
+                </div>
 
-<!-- NOTE (opzionale) -->
-      <div class="mb-3">
-        <label for="note" class="form-label text-white">Note (opzionale)</label>
-        <textarea id="note"
-                  name="note"
-                  class="form-control"
-                  rows="3"
-                  maxlength="500"
-                  placeholder="Aggiungi eventuali indicazioni (es. consegna, preferenze, urgenze)..."
-                  th:text="${note}"></textarea>
-        <div class="form-text text-white">
-          <span id="noteCounter">0</span>/500
-        </div>
-      </div>
+                <div class="col-md-4">
+                    <label for="quantita" class="form-label">Quantità</label>
+                    <input type="number" class="form-control" id="quantita" name="quantita" 
+                           th:attr="max=${caricamento.quantita}" min="1" required>
+                    <div class_ th:text="'Disponibilità massima: ' + ${caricamento.quantita}" 
+                         class="form-text"></div> </div>
+              </div>
 
+              <div class="mb-3">
+                <label for="note" class="form-label">Note (opzionale)</label>
+                <textarea id="note"
+                          name="note"
+                          class="form-control"
+                          rows="3"
+                          maxlength="500"
+                          placeholder="Aggiungi eventuali indicazioni..."
+                          th:text="${note}"></textarea>
+                <div class="form-text">
+                  <span id="noteCounter">0</span>/500
+                </div>
+              </div>
 
-            <!-- Pulsante invio -->
- <div class="text-center mt-3">
-    <button type="submit" class="btn btn-success px-4">Conferma</button>
-</div>
+              <div class="text-center mt-4">
+                <button type="submit" class="btn btn-success btn-lg px-4">Conferma</button>
+              </div>
 
-        </form>
-<script>
-    $(document).ready(function() {
-        $('.select2').select2({
-            placeholder: "Seleziona un sostenitore...",
-            allowClear: true,
-            width: '100%',
-            language: {
-                noResults: function() {
-                    return "Nessun cliente trovato";
-                }
-            }
-        });
-    });
-</script>
-    </div>
+            </form>
+        
+        </div> </div> 
 </section>
-
-
-
-
-
 </body>
 </html>

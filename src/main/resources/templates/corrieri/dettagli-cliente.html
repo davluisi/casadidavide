@@ -4,42 +4,36 @@
       layout:decorate="~{layout}"
       th:with="page='dettagli-cliente'">
 
-<head>
-    <title>Dettagli cliente</title>
-</head>
-
 <body>
 <section layout:fragment="content">
-    <div class="container">
 
-        <!-- Pulsante Indietro -->
-        <div class="d-flex justify-content-start mb-4">
-<a th:href="@{'/corrieri/consegne-da-elaborare'(idCampagna=${campagna.id})}" 
-   class="btn btn-secondary">←</a>
-        </div>
+    <div class="row justify-content-center">
+        <div class="col-md-8 content-card">
 
+            <div class="d-flex justify-content-start mb-4">
+                <a th:href="@{'/corrieri/consegne-da-elaborare'(idCampagna=${campagna.id})}" 
+                   class="btn btn-secondary">←</a>
+            </div>
+            
+            <div class="dati-cliente">
+                <p><strong>Nominativo:</strong> <span th:text="${cliente.nominativo}"></span></p>
+                <p><strong>Indirizzo:</strong> <span th:text="${cliente.indirizzoSpedizione}"></span></p>
+                <p><strong>Comune:</strong> <span th:text="${cliente.comuneSpedizione}"></span></p>
+                <p><strong>Provincia:</strong> <span th:text="${cliente.provinciaSpedizione}"></span></p>
+                <p><strong>Email:</strong> <span th:text="${cliente.email}"></span></p>
+                <p><strong>Telefono:</strong> <span th:text="${cliente.telefonoCellulare}"></span></p>
 
-        <!-- Dati cliente -->
-        <div class="card bg-dark text-white p-4">
-            <p><strong>Nominativo:</strong> <span th:text="${cliente.nominativo}"></span></p>
-            <p><strong>Indirizzo:</strong> <span th:text="${cliente.indirizzoSpedizione}"></span></p>
-            <p><strong>Comune:</strong> <span th:text="${cliente.comuneSpedizione}"></span></p>
-            <p><strong>Provincia:</strong> <span th:text="${cliente.provinciaSpedizione}"></span></p>
-            <p><strong>Email:</strong> <span th:text="${cliente.email}"></span></p>
-            <p><strong>Telefono:</strong> <span th:text="${cliente.telefonoCellulare}"></span></p>
+                <p th:if="${cliente.telefonoFisso != null and !#strings.isEmpty(cliente.telefonoFisso)}">
+                    <strong>Telefono fisso:</strong> <span th:text="${cliente.telefonoFisso}"></span>
+                </p>
+                <p th:if="${cliente.fax != null and !#strings.isEmpty(cliente.fax)}">
+                    <strong>Fax:</strong> <span th:text="${cliente.fax}"></span>
+                </p>
+                <p th:if="${cliente.pec != null and !#strings.isEmpty(cliente.pec)}">
+                    <strong>PEC:</strong> <span th:text="${cliente.pec}"></span>
+                </p>
+            </div>
 
-            <p th:if="${cliente.telefonoFisso != null and !#strings.isEmpty(cliente.telefonoFisso)}">
-                <strong>Telefono fisso:</strong> <span th:text="${cliente.telefonoFisso}"></span>
-            </p>
-            <p th:if="${cliente.fax != null and !#strings.isEmpty(cliente.fax)}">
-                <strong>Fax:</strong> <span th:text="${cliente.fax}"></span>
-            </p>
-            <p th:if="${cliente.pec != null and !#strings.isEmpty(cliente.pec)}">
-                <strong>PEC:</strong> <span th:text="${cliente.pec}"></span>
-            </p>
-        </div>
-
-    </div>
-</section>
+        </div> </div> </section>
 </body>
 </html>

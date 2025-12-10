@@ -4,10 +4,6 @@
       layout:decorate="~{layout}"
       th:with="page='disponibilita-prenotazione-campagna'">
 
-<head>
-    <title th:text="${title}">Disponibilità campagna</title>
-</head>
-
 <body>
 <section layout:fragment="content">
     <div class="container">
@@ -18,11 +14,10 @@
 		    
 		</div>
 
-
         <!-- Tabella disponibilità -->
         <div class="table-responsive">
-            <table class="table table-bordered table-hover table-striped align-middle text-white">
-                <thead class="table-dark">
+            <table class="table table-hover align-middle">
+                <thead>
                     <tr>
                         <th>Prodotto</th>
                         <th>Costo di acquisto</th>
@@ -34,10 +29,10 @@
                 <tbody>
                     <tr th:each="caricamento : ${caricamenti}">
                         <td th:text="${caricamento.prodotto.descrizioneProdotto}"></td>
-                        <td th:text="'€' + ${caricamento.prodotto.costoProdotto}"></td>
-                        <td th:text="'€' + ${caricamento.prodotto.prezzoVendita}"></td>
-                        <td th:text="${caricamento.quantita}"></td>
-                        <td>
+                        <td class="text-center" th:text="'€' + ${caricamento.prodotto.costoProdotto}"></td>
+                        <td class="text-center" th:text="'€' + ${caricamento.prodotto.prezzoVendita}"></td>
+                        <td class="text-center" th:text="${caricamento.quantita}"></td>
+                        <td class="text-center">
 							<a th:href="@{'/soci/prenotazione-prodotti/disponibilita-prenotazione-campagna/' + ${caricamento.campagna.id}
 								+ '/prenota-prodotto/' + ${caricamento.prodotto.id}}" class="btn btn-warning btn-sm me-2">Prenota</a>
 

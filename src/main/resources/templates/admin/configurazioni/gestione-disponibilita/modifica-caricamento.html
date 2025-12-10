@@ -3,64 +3,45 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout}"
       th:with="page='modifica-caricamento'">
-
-<head>
-    <title th:text="${title}">Modifica caricamento</title>
-</head>
-
 <body>
 <section layout:fragment="content">
-    <div class="container">
-
-        <!-- Pulsante per tornare indietro -->
-        <div class="d-flex justify-content-start mb-4">
-            <a th:href="@{'/admin/configurazioni/gestione-disponibilita/storico/' 
-                          + ${carico.campagna.id} + '/' + ${carico.prodotto.id}}" 
-               class="btn btn-secondary">←</a>
-        </div>
-
-        <!-- Titolo dinamico -->
-        <h2 class="mb-4 text-white">
-            Prodotto: 
-            <span th:text="${carico.prodotto.descrizioneProdotto}"></span>
-        </h2>    
-        <h2 class="mb-4 text-white">    
-            Campagna:
-            <span th:text="${carico.campagna.descrizioneCampagna}"></span>
-        </h2>
-        <h2 class="mb-4 text-white">    
-            Socio:
-            <span th:text="${carico.socio.nominativo}"></span>
-        </h2>
-
-        <!-- Form di modifica -->
-        <form th:action="@{'/admin/configurazioni/gestione-disponibilita/modifica-caricamento/' + ${carico.id}}" 
-              method="post">
-
-            <!-- Quantità -->
-            <div class="mb-3">
-                <label for="quantita" class="form-label text-white">Quantità</label>
-                <input type="number" class="form-control" id="quantita" name="nuovaQuantitaCaricamento" 
-                       min="1" th:value="${carico.quantita}" required>
-            </div>
-
-            <!-- Data caricamento -->
-            <div class="mb-3">
-                <label for="data" class="form-label text-white">Data caricamento</label>
-                <input type="date" class="form-control" id="data" name="nuovaData" 
-                       th:value="${carico.data}" required>
-            </div>
-
-            <!-- Pulsante invio -->
-            <div class="d-flex justify-content-between mt-4">
+    
+    <div class="row justify-content-center">
+        <div class="col-md-8 content-card"> <div class="d-flex justify-content-start mb-4">
                 <a th:href="@{'/admin/configurazioni/gestione-disponibilita/storico/' 
                               + ${carico.campagna.id} + '/' + ${carico.prodotto.id}}" 
-                   class="btn btn-outline-light">Annulla</a>
-                <button type="submit" class="btn btn-success">Salva modifiche</button>
+                   class="btn btn-secondary">←</a>
             </div>
-        </form>
 
-    </div>
-</section>
+            <div class="info-blocco mb-4" style="border-bottom: 1px solid #eee; padding-bottom: 1rem;">
+                <p><strong>Prodotto:</strong> <span th:text="${carico.prodotto.descrizioneProdotto}"></span></p>    
+                <p><strong>Campagna:</strong> <span th:text="${carico.campagna.descrizioneCampagna}"></span></p>
+                <p><strong>Socio:</strong> <span th:text="${carico.socio.nominativo}"></span></p>
+            </div>
+
+            <form th:action="@{'/admin/configurazioni/gestione-disponibilita/modifica-caricamento/' + ${carico.id}}" 
+                  method="post">
+
+                <div class="mb-3">
+                    <label for="quantita" class="form-label">Quantità</label>
+                    <input type="number" class="form-control" id="quantita" name="nuovaQuantitaCaricamento" 
+                           min="1" th:value="${carico.quantita}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="data" class="form-label">Data caricamento</label>
+                    <input type="date" class="form-control" id="data" name="nuovaData" 
+                           th:value="${carico.data}" required>
+                </div>
+
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                    <a th:href="@{'/admin/configurazioni/gestione-disponibilita/storico/' 
+                                  + ${carico.campagna.id} + '/' + ${carico.prodotto.id}}" 
+                       class="btn btn-secondary btn-lg">Annulla</a>
+                    <button type="submit" class="btn btn-success btn-lg">Salva modifiche</button>
+                </div>
+            </form>
+
+        </div> </div> </section>
 </body>
 </html>

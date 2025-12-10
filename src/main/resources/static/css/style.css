@@ -1,0 +1,298 @@
+/* Sfondo pulito per l'intera pagina */
+body {
+    background-color: #9eaec1;
+    color: #1d3557;
+    font-size: 1.1rem;
+    padding-top: 80px; /* Spazio per la navbar fissa */
+    padding-bottom: 100px;
+}
+
+/* Stile per il contenuto principale (h1) */
+h1 {
+    font-family: 'Poppins', sans-serif; /* <-- Font moderno */
+    font-weight: 700; /* grassetto */
+    color: #1d3557; /* <-- Blu molto scuro, più di 'navy' */
+    text-align: center;
+    margin-top: 30px;
+    font-size: 2.5rem;
+}
+
+
+/* Stile per la navbar */
+.navbar-custom {
+    background-color: #ffffff; /* Sfondo bianco pulito */
+    box-shadow: 0 2px 4px rgba(0,0,0,.04); /* Ombra leggera */
+}
+
+.navbar-custom .navbar-brand {
+    font-family: 'Poppins', sans-serif; /* <-- Aggiungi questo */
+    font-weight: 700; /* grassetto (come h1) */
+    color: #1d3557; /* <-- Blu scuro (come h1) */
+}
+
+.navbar-custom .navbar-nav .nav-link {
+    color: #1d3557; /* Link scuri */
+}
+
+.navbar-custom .btn-outline-danger {
+    border-color: navy;
+    color: navy;
+}
+.navbar-custom .btn-outline-danger:hover {
+    background-color: navy;
+    color: white;
+}
+
+
+/* Classe per i form
+*/
+.content-card {
+    background-color: #ffffff;
+    border: none;
+    border-radius: 8px; /* Angoli arrotondati */
+    box-shadow: 0 4px 12px rgba(0,0,0,.05); /* Ombra morbida */
+    padding: 2.5rem; /* Spazio interno */
+    margin-top: 2rem;
+}
+
+/* Stile per mobile */
+@media (max-width: 576px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+    .content-card {
+        padding: 1.5rem;
+    }
+}
+
+/* ========================================= */
+/* --- Stili Pulsanti Moderni --- */
+/* ========================================= */
+
+/* 1. Stile base per tutti i pulsanti */
+.btn {
+    font-family: 'Poppins', sans-serif; /* Usa il font moderno che abbiamo importato */
+    font-weight: 700;                   /* Testo in grassetto */
+    border-radius: 8px;                 /* Angoli arrotondati (come le card) */
+    text-transform: uppercase;          /* Testo tutto maiuscolo per un look deciso */
+    letter-spacing: 0.5px;              /* Leggera spaziatura tra le lettere */
+    box-shadow: 0 2px 8px rgba(0,0,0,.1); /* Ombra leggera */
+    transition: all 0.2s ease-in-out;   /* Transizione per l'hover */
+    border: none;                       /* Rimuove il bordo predefinito */
+}
+
+/* 2. Effetto "sollevato" al passaggio del mouse */
+.btn:hover {
+    transform: translateY(-2px); /* Solleva il pulsante */
+    box-shadow: 0 4px 12px rgba(0,0,0,.15); /* Ombra più pronunciata */
+}
+
+/* 3. Forziamo il testo BIANCO su tutti i pulsanti colorati.
+      L'uso di !important è necessario per sovrascrivere Bootstrap.
+*/
+.btn-primary,
+.btn-success,
+.btn-warning,
+.btn-danger,
+.btn-info {
+    color: #ffffff !important; 
+}
+
+.btn-secondary{
+	background-color: #2c3e50;
+}
+
+/* 4. IMPORTANTE: Correzione per btn-warning.
+      Il giallo di default è troppo chiaro per il testo bianco.
+      Usiamo un arancione/giallo più scuro e leggibile.
+*/
+.btn-warning {
+    background-color: #f5a623; /* Un arancione scuro */
+    border-color: #f5a623;
+}
+.btn-warning:hover {
+    background-color: #d48e1a; /* Versione più scura per l'hover */
+    border-color: #d48e1a;
+}
+
+/* ========================================= */
+/* --- Stili Tabella Strutturati (Corretto) --- */
+/* ========================================= */
+
+/* 1. Contenitore della tabella (come una card) */
+.table {
+    background-color: #ffffff; /* Sfondo bianco */
+    font-size: 0.95rem;
+    border-radius: 8px;        
+    box-shadow: 0 4px 12px rgba(0,0,0,.05); 
+    overflow: hidden;          
+    border: none;
+    /* Manteniamo i bordi separati per un look pulito */
+    border-collapse: separate; 
+    border-spacing: 0;
+}
+
+/* 2. Header Tabella (thead): 
+   Applicato alle CELLE (th), non alla riga (thead).
+*/
+.table thead th {
+    background-color: #2c3e50; /* Un grigio-navy scuro e pulito */
+    color: #ffffff;            /* Testo bianco per contrasto */
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 0.35rem 0.6rem;
+    vertical-align: middle;
+    white-space: normal;
+    text-align: center;
+}
+
+/* 3. Corpo Tabella (tbody):
+   Testo nero come richiesto. */
+.table tbody {
+    color: #212529; /* Testo nero/scuro */
+}
+
+/* 4. Stile celle corpo (td) */
+.table td {
+    padding: 0.35rem 0.6rem;
+    vertical-align: middle;    
+}
+
+/* 5. Bordi più visibili
+   Applichiamo un bordo grigio medio a TUTTE le celle.
+*/
+.table th,
+.table td {
+    border: 1px solid #adb5bd; /* <-- Bordo grigio medio, più visibile */
+}
+
+.table .col-min {
+    width: 1%;
+}
+
+/* 6. Pulizia dei bordi (per rimuovere duplicati) */
+.table th + th,
+.table td + td {
+    border-left: none; /* Rimuove bordo sinistro a celle non-prime */
+}
+.table tbody tr td {
+    border-top: none; /* Rimuove bordo alto alle celle del corpo */
+}
+
+/* 7. Angoli arrotondati (solo angoli esterni) */
+.table thead th:first-child { border-top-left-radius: 8px; }
+.table thead th:last-child { border-top-right-radius: 8px; }
+.table tbody tr:last-child td:first-child { border-bottom-left-radius: 8px; }
+.table tbody tr:last-child td:last-child { border-bottom-right-radius: 8px; }
+
+
+/* 8. Effetto Hover (invariato) */
+.table-hover > tbody > tr:hover > * {
+    background-color: #eaf1f8; 
+    color: #1d3557;            
+}
+
+/* 9. Stile per i pulsanti DENTRO le tabelle (invariato) */
+.table .btn {
+    text-transform: none; 
+    font-weight: 600;
+    letter-spacing: 0;
+}
+
+/* ========================================= */
+/* --- Stili per compatibilità Select2 --- */
+/* ========================================= */
+
+/* Campo selezionato (chiuso) */
+.select2-container--default .select2-selection--single {
+    background-color: #fff !important; /* Sfondo bianco */
+    color: #2c3e50 !important;         /* Testo blu-grigio (come il body) */
+    border: 1px solid #ced4da !important; /* Bordo grigio standard Bootstrap */
+    height: 38px !important;            /* Altezza standard Bootstrap */
+    padding-top: 5px;                   /* Allineamento verticale */
+}
+
+/* Testo nel campo chiuso */
+.select2-selection__rendered,
+.select2-selection__placeholder {
+    color: #2c3e50 !important; /* Testo blu-grigio */
+}
+
+/* Freccetta */
+.select2-selection__arrow b {
+    border-color: #2c3e50 transparent transparent transparent !important;
+}
+
+/* Menu a tendina aperto */
+.select2-container--default .select2-results > .select2-results__options {
+    background-color: #ffffff; /* Sfondo bianco */
+    color: #2c3e50;            /* Testo blu-grigio */
+}
+
+/* Voce in evidenza (hover) */
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background-color: #eaf1f8 !important; /* Stesso blu-chiaro dell'hover tabella */
+    color: #1d3557 !important;            /* Testo blu scuro (come h1) */
+}
+
+/* Voce selezionata */
+.select2-container--default .select2-results__option--selected {
+	background-color: #d1ddeB !important; /* Sfondo blu-medio (come il body) */
+    color: #1d3557 !important;
+}
+
+/* Barra di ricerca interna al dropdown */
+.select2-container--default .select2-search--dropdown .select2-search__field {
+    background-color: #fff; 
+    color: #2c3e50; 
+    border: 1px solid #ced4da !important;
+}
+
+/* Stili per form-row (da aggiungi-prodotto.html) */
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+.form-row .form-group {
+    flex: 1; /* Ogni gruppo occupa spazio proporzionale */
+    min-width: 180px;
+}
+.form-row .form-group.produttore {
+    flex: 1.5; /* Il produttore occupa più spazio */
+}
+
+/* ========================================= */
+/* --- Stili per Centratura Pagina di Login (RIVEDUTI) --- */
+/* ========================================= */
+
+.login-page {
+    /* Rimuove il padding per la navbar (non presente) */
+    padding-top: 0 !important; 
+    
+    /* Assicura che il body occupi l'altezza del viewport */
+    min-height: 100vh;
+    
+    /* Attiva Flexbox sul body */
+    display: flex;
+    flex-direction: column; 
+    
+    /* Centra orizzontalmente il contenuto (h1 e container) */
+    align-items: center; 
+    
+    /* Centra verticalmente il contenuto */
+    justify-content: center;
+}
+
+/* Rimuovi o commenta la riga seguente:
+.login-page .container h1 {
+    display: none;
+}
+*/
+
+/* Rimuove il margin-top del .content-card per farlo attaccare all'h1 */
+.login-page .content-card {
+    margin-top: 0 !important;
+}

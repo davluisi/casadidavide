@@ -4,27 +4,23 @@
       layout:decorate="~{layout}"
       th:with="page='modifica-socio'">
 
-<head>
-    <title>Modifica Socio</title>
-</head>
-
 <body>
 <section layout:fragment="content">
 
     <div class="container">
+    
+    	<!-- Titolo dinamico con nome del socio -->
+        <h1 class="mb-4" th:text="${socio.nominativo}"></h1>
 
         <!-- Pulsante per tornare a Gestione Soci -->
         <div class="d-flex justify-content-start mb-3">
             <a th:href="@{/admin/configurazioni/gestione-soci}" class="btn btn-secondary">←</a>
         </div>
 
-        <!-- Titolo dinamico con nome del socio -->
-        <h2 class="mb-4" th:text="${socio.nominativo}">Modifica socio</h2>
-
         <!-- Form di modifica -->
         <form th:action="@{'/admin/configurazioni/gestione-soci/modifica/' + ${socio.id}}" method="post">
             <div class="mb-4">
-                <label for="ruolo" class="form-label fw-bold">Ruolo</label>
+                <label for="ruolo" class="form-label">Ruolo</label>
                 <select id="ruolo" name="ruolo" class="form-select" required>
                     <option value="SOCIO" th:selected="${socio.ruolo == 'SOCIO'}">Socio</option>
                     <option value="CORRIERE" th:selected="${socio.ruolo == 'CORRIERE'}">Corriere</option>

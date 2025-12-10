@@ -19,18 +19,18 @@
         </div>
 
             <!-- Colonna immagine -->
-            <div class="col-md-6 text-center mb-4 mb-md-0">
+            <div class="col-md-6 d-flex justify-content-center">
                 <img th:src="@{/uploads/images/logo_asso.png}" alt="Logo Associazione"
-                     class="img-fluid" style="max-width: 400px;">
+                     class="img-fluid" style="max-width: 80%; height: auto;">
             </div>
 
             <!-- Colonna pulsanti -->
             <div class="col-md-6 d-flex flex-column gap-3">
-                <a th:href="@{/admin/configurazioni/gestione-soci}" class="btn btn-outline-light btn-lg btn-block bg-primary">Gestione Soci</a>
-                <a th:href="@{/admin/configurazioni/gestione-clienti}" class="btn btn-outline-light btn-lg btn-block bg-success">Gestione Sostenitori</a>
-                <a th:href="@{/admin/configurazioni/gestione-campagne}" class="btn btn-outline-light btn-lg btn-block bg-info">Gestione Campagne</a>
-                <a th:href="@{/admin/configurazioni/gestione-prodotti}" class="btn btn-outline-light btn-lg btn-block bg-warning text-dark">Gestione Prodotti</a>
-                <a th:href="@{/admin/configurazioni/gestione-disponibilita}" class="btn btn-outline-light btn-lg btn-block bg-danger">Gestione Disponibilità Prodotti per Campagne</a>
+                <a th:href="@{/admin/configurazioni/gestione-soci}" class="btn btn-lg btn-block btn-primary">Gestione utenti</a>
+                <a th:href="@{/admin/configurazioni/gestione-clienti}" class="btn btn-lg btn-block btn-success">Gestione sostenitori</a>
+                <a th:href="@{/admin/configurazioni/gestione-campagne}" class="btn btn-lg btn-block btn-info">Gestione campagne</a>
+                <a th:href="@{/admin/configurazioni/gestione-prodotti}" class="btn btn-lg btn-block btn-warning">Gestione prodotti</a>
+                <a th:href="@{/admin/configurazioni/gestione-disponibilita}" class="btn btn-lg btn-block btn-danger">Gestione disponibilità prodotti per campagne</a>
             </div>
 
         </div>

@@ -27,8 +27,12 @@ public class Socio implements UserDetails {
     private String ruolo;
     @Column(name="data_nascita")
     private LocalDate dataNascita;
+    @Column(name = "reset_password_token")
+    private String resetPasswordToken;
 
-    // Residenza
+    
+
+	// Residenza
     @Column(name="indirizzo_residenza")
     private String indirizzoResidenza;
     @Column(name="comune_residenza")
@@ -58,6 +62,14 @@ public class Socio implements UserDetails {
     }
 
     // Getters & Setters
+    
+    public String getResetPasswordToken() {
+		return resetPasswordToken;
+	}
+
+	public void setResetPasswordToken(String resetPasswordToken) {
+		this.resetPasswordToken = resetPasswordToken;
+	}
     
 	@Override
 	public String getPassword() {

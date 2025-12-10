@@ -18,7 +18,7 @@
 
     <div class="container">
     
-    		<!-- Pulsanti in alto: Configurazioni e Aggiunta -->
+   		<!-- Pulsanti in alto: Configurazioni e Aggiunta -->
 		<div class="d-flex justify-content-between mb-3">
 		    <a th:href="@{/admin/configurazioni}" class="btn btn-secondary">←</a>
    		    <a th:href="@{/admin/configurazioni/gestione-campagne/aggiungi-campagna}" class="btn btn-warning">Aggiungi campagna</a>
@@ -32,11 +32,10 @@
 		    </div>
 		</form>
 
-    	
 	    <!-- Tabella Campagne -->
         <div class="table-responsive">
-            <table class="table table-bordered table-hover table-striped align-middle text-white">
-                <thead class="table-dark">
+            <table class="table table-hover align-middle">
+                <thead>
                     <tr>
                         <th>Descrizione</th>
                         <th>Azioni</th>
@@ -45,16 +44,8 @@
                 <tbody>
                     <tr th:each="campagna : ${campagne}">
                         <td th:text="${campagna.descrizioneCampagna}"></td>
-                        <td>
+                        <td class="text-center">
                             <a th:href="@{'/admin/configurazioni/gestione-campagne/modifica/' + ${campagna.id}}" class="btn btn-warning btn-sm me-2">Modifica</a>
-                            
-                            <!--  Tasto "elimina" disabilitato
-	                            <form th:action="@{'/admin/configurazioni/gestione-campagne/elimina/' + ${campagna.id}}"
-	                                  method="post" th:object="${campagna}" style="display:inline"
-	                                  onsubmit="return confermaEliminazione()">
-	                                <button type="submit" class="btn btn-danger btn-sm">Elimina</button>
-	                            </form>
-                            -->
                         </td>
                     </tr>
                 </tbody>

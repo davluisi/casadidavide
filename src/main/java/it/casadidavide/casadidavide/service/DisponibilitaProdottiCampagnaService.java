@@ -36,7 +36,7 @@ public class DisponibilitaProdottiCampagnaService {
     }
 
 	public List<DisponibilitaProdottiCampagna> findByCampagna(Campagna campagna) {
-        return repository.findByCampagnaOrderByProdotto_DescrizioneProdotto(campagna);
+        return repository.findByCampagnaAndQuantitaGreaterThanOrderByProdotto_DescrizioneProdotto(campagna, 0);
 	}
 
 	@Transactional
